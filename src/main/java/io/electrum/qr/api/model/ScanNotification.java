@@ -28,7 +28,7 @@ public class ScanNotification {
 
    protected String id = null;
    protected DateTime time = null;
-   protected Institution partner = null;
+   protected Institution settlementEntity = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
    protected Amounts amounts = null;
    protected String tranId = null;
@@ -79,21 +79,21 @@ public class ScanNotification {
    /**
     * Data relating to the entity with whom the Merchant will settle the transaction.
     **/
-   public ScanNotification partner(Institution partner) {
-      this.partner = partner;
+   public ScanNotification partner(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
       return this;
    }
 
    @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
-   @JsonProperty("partner")
+   @JsonProperty("settlementEntity")
    @Valid
    @NotNull
    public Institution getPartner() {
-      return partner;
+      return settlementEntity;
    }
 
-   public void setPartner(Institution partner) {
-      this.partner = partner;
+   public void setPartner(Institution settlementEntity) {
+      this.settlementEntity = settlementEntity;
    }
 
    /**
@@ -182,7 +182,7 @@ public class ScanNotification {
          return false;
       ScanNotification request = (ScanNotification) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
-            && Objects.equals(partner, request.partner)
+            && Objects.equals(settlementEntity, request.settlementEntity)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers)
             && Objects.equals(amounts, request.amounts) && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
@@ -191,7 +191,7 @@ public class ScanNotification {
    @Override
    public int hashCode() {
       return Objects
-            .hash(super.hashCode(), id, time, partner, thirdPartyIdentifiers, amounts, tranId, partnerPaymentToken);
+            .hash(super.hashCode(), id, time, settlementEntity, thirdPartyIdentifiers, amounts, tranId, partnerPaymentToken);
    }
 
    @Override
@@ -201,7 +201,7 @@ public class ScanNotification {
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
+      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
