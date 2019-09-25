@@ -1,5 +1,6 @@
 package io.electrum.qr.api.model;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.validation.Valid;
@@ -10,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
+import io.electrum.vas.model.Tender;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -22,6 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class PaymentResponse extends Transaction {
 
    protected Institution partner = null;
+   protected List<Tender> tenders = null;
    protected Amounts amounts = null;
    protected String tranId = null;
    protected String partnerPaymentToken = null;
@@ -53,6 +56,25 @@ public class PaymentResponse extends Transaction {
       this.amounts = amounts;
       return this;
    }
+
+   /**
+    * An array of tenders used to pay for the transaction
+    **/
+   public PaymentResponse tenders(List<Tender> tenders) {
+      this.tenders = tenders;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "An array of tenders used to pay for the transaction.")
+   @JsonProperty("tenders")
+   public List<Tender> getTenders() {
+      return tenders;
+   }
+
+   public void setTenders(List<Tender> tenders) {
+      this.tenders = tenders;
+   }
+
 
    @ApiModelProperty(required = true, value = "The amounts pertaining to the transaction.")
    @JsonProperty("amounts")
@@ -116,6 +138,7 @@ public class PaymentResponse extends Transaction {
          return false;
       PaymentResponse request = (PaymentResponse) o;
       return Objects.equals(amounts, request.amounts) && Objects.equals(partner, request.partner)
+            && Objects.equals(tenders, request.tenders)
             && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
    }
@@ -130,6 +153,7 @@ public class PaymentResponse extends Transaction {
       StringBuilder sb = new StringBuilder();
       sb.append("class PaymentResponse {\n");
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
+      sb.append("    tenders: ").append(Utils.toIndentedString(tenders)).append("\n");
       sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("    qrCode: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
