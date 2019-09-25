@@ -89,7 +89,7 @@ public class ScanNotification {
    @JsonProperty("settlementEntity")
    @Valid
    @NotNull
-   public Institution getSettlementEntity () {
+   public Institution getSettlementEntity() {
       return settlementEntity;
    }
 
@@ -97,25 +97,25 @@ public class ScanNotification {
       this.settlementEntity = settlementEntity;
    }
 
-    /**
-     * Data relating to the entity who will process the payment.
-     **/
-    public ScanNotification partner(Institution partner) {
-        this.partner = partner;
-        return this;
-    }
+   /**
+    * Data relating to the entity who will process the payment.
+    **/
+   public ScanNotification partner(Institution partner) {
+      this.partner = partner;
+      return this;
+   }
 
-    @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
-    @JsonProperty("partner")
-    @Valid
-    @NotNull
-    public Institution getPartner () {
-        return partner;
-    }
+   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @JsonProperty("partner")
+   @Valid
+   @NotNull
+   public Institution getPartner() {
+      return partner;
+   }
 
-    public void setPartner(Institution partner) {
-        this.partner = partner;
-    }
+   public void setPartner(Institution partner) {
+      this.partner = partner;
+   }
 
    /**
     * An array of identifiers which identify the transaction within each entity's system.
@@ -203,8 +203,7 @@ public class ScanNotification {
          return false;
       ScanNotification request = (ScanNotification) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
-            && Objects.equals(settlementEntity, request.settlementEntity)
-            && Objects.equals(partner, request.partner)
+            && Objects.equals(settlementEntity, request.settlementEntity) && Objects.equals(partner, request.partner)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers)
             && Objects.equals(amounts, request.amounts) && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
@@ -212,8 +211,16 @@ public class ScanNotification {
 
    @Override
    public int hashCode() {
-      return Objects
-            .hash(super.hashCode(), id, time, settlementEntity, partner, thirdPartyIdentifiers, amounts, tranId, partnerPaymentToken);
+      return Objects.hash(
+            super.hashCode(),
+            id,
+            time,
+            settlementEntity,
+            partner,
+            thirdPartyIdentifiers,
+            amounts,
+            tranId,
+            partnerPaymentToken);
    }
 
    @Override

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,9 +21,30 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "The response to a successful payment with a linked QR code scan.")
 public class PaymentResponse extends Transaction {
 
+   protected Institution partner = null;
    protected Amounts amounts = null;
    protected String tranId = null;
    protected String partnerPaymentToken = null;
+
+   /**
+    * Data relating to the entity who will process the payment.
+    **/
+   public PaymentResponse partner(Institution partner) {
+      this.partner = partner;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @JsonProperty("partner")
+   @Valid
+   @NotNull
+   public Institution getPartner() {
+      return partner;
+   }
+
+   public void setPartner(Institution partner) {
+      this.partner = partner;
+   }
 
    /**
     * The amounts pertaining to the transaction.
@@ -93,7 +115,8 @@ public class PaymentResponse extends Transaction {
       if (!super.equals(o))
          return false;
       PaymentResponse request = (PaymentResponse) o;
-      return Objects.equals(amounts, request.amounts) && Objects.equals(tranId, request.tranId)
+      return Objects.equals(amounts, request.amounts) && Objects.equals(partner, request.partner)
+            && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
    }
 
@@ -107,6 +130,7 @@ public class PaymentResponse extends Transaction {
       StringBuilder sb = new StringBuilder();
       sb.append("class PaymentResponse {\n");
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
+      sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("    qrCode: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
       sb.append("}");
