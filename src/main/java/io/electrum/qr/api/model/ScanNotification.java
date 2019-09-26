@@ -85,7 +85,7 @@ public class ScanNotification {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @ApiModelProperty(required = false, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
    @JsonProperty("settlementEntity")
    @Valid
    @NotNull
