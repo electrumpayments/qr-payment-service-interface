@@ -28,7 +28,7 @@ public class PaymentConfirmation extends BasicAdvice {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @ApiModelProperty(required = false, value = "Data relating to the entity who will process the payment.")
    @JsonProperty("partner")
    @Valid
    @NotNull
