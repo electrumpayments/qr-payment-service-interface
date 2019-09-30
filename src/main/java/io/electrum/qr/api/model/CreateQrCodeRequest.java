@@ -20,8 +20,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * A notification sent by the partner indicating that the partner received a scan of the QR code linked to the
- * transaction ID.
+ * A request from the merchant for a QR code to be generated and returned to the merchant to display to the customer for the customer to scan.
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
@@ -79,14 +78,14 @@ public class CreateQrCodeRequest {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
+    * Data relating to the originator of the request.
     **/
    public CreateQrCodeRequest originator(Originator originator) {
       this.originator = originator;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @ApiModelProperty(required = true, value = "Data relating to the originator of the request.")
    @JsonProperty("originator")
    @Valid
    @NotNull
@@ -99,14 +98,14 @@ public class CreateQrCodeRequest {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
+    * Data relating to the sender of the CreateQrCodeRequest.
     **/
    public CreateQrCodeRequest client(Institution client) {
       this.client = client;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @ApiModelProperty(required = true, value = "Data relating to the sender of the CreateQrCodeRequest.")
    @JsonProperty("client")
    @Valid
    @NotNull
@@ -138,14 +137,14 @@ public class CreateQrCodeRequest {
    }
 
    /**
-    * The transaction identifier encoded within the QR Code which was scanned.
+    * This is a reference set by the original source of the request.
     **/
    public CreateQrCodeRequest rrn(String rrn) {
       this.rrn = rrn;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The transaction identifier encoded within the QR Code which was scanned.")
+   @ApiModelProperty(required = false, value = "This is a reference set by the original source of the request.")
    @JsonProperty("rrn")
    public String getRrn() {
       return rrn;
@@ -156,14 +155,14 @@ public class CreateQrCodeRequest {
    }
 
    /**
-    * The transaction identifier encoded within the QR Code which was scanned.
+    * The System Trace Audit Number can be used to locate transactions across different systems.
     **/
    public CreateQrCodeRequest stan(String stan) {
       this.stan = stan;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The transaction identifier encoded within the QR Code which was scanned.")
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across different systems.")
    @JsonProperty("stan")
    public String getStan() {
       return stan;
@@ -174,14 +173,14 @@ public class CreateQrCodeRequest {
    }
 
    /**
-    * The amounts pertaining to the QR code which was scanned.
+    * The amounts pertaining to the QR code to be created.
     **/
    public CreateQrCodeRequest amounts(Amounts amounts) {
       this.amounts = amounts;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was scanned.")
+   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code to be created.")
    @JsonProperty("amounts")
    @Valid
    public Amounts getAmounts() {
@@ -226,7 +225,6 @@ public class CreateQrCodeRequest {
       sb.append("    stan: ").append(Utils.toIndentedString(stan)).append("\n");
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("}");
-      sb.append(super.toString());
       return sb.toString();
    }
 }

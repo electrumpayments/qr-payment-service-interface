@@ -27,17 +27,20 @@ public class PaymentRequest extends Transaction {
    protected String partnerPaymentToken = null;
 
    /**
-    * Data relating to the entity who will process the payment.
+    * Data relating to the entity who will process the payment. This identifies the entity who provided the
+    * ScanNotification for the QR code associated with this PaymentRequest. This should be populated if known to aid in
+    * routing the PaymentRequest to the entity which provided the ScanNotification.
     **/
    public PaymentRequest partner(Institution partner) {
       this.partner = partner;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @ApiModelProperty(value = "Data relating to the entity who will process the payment. This identifies the entity who provided the "
+         + "ScanNotification for the QR code associated with this PaymentRequest. This should be populated if known to aid in "
+         + "routing the PaymentRequest to the entity which provided the ScanNotification.")
    @JsonProperty("partner")
    @Valid
-   @NotNull
    public Institution getPartner() {
       return partner;
    }
@@ -47,14 +50,16 @@ public class PaymentRequest extends Transaction {
    }
 
    /**
-    * The amounts pertaining to the transaction.
+    * The amounts pertaining to the transaction. Note that the requestAmount herein maybe be different to that submitted
+    * when the QR code was requested. This request amount describes the actual amount to be processed in the
+    * transaction.
     **/
    public PaymentRequest amounts(Amounts amounts) {
       this.amounts = amounts;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The amounts pertaining to the transaction.")
+   @ApiModelProperty(required = true, value = "The amounts pertaining to the transaction. Note that the requestAmount herein maybe be different to that submitted when the QR code was requested. This request amount describes the actual amount to be processed in the transaction.")
    @JsonProperty("amounts")
    @Valid
    @NotNull
@@ -68,7 +73,8 @@ public class PaymentRequest extends Transaction {
 
    /**
     * The unique transaction identifier related to this transaction. This transaction identifier is encoded within the
-    * QR Code and is to be used to associate the scan and the payment request.
+    * QR Code and is to be used to associate the scan and the payment request. This should be the same as the value
+    * returned in the tranId field of the CreateQrCodeResponse.
     **/
    public PaymentRequest tranId(String tranId) {
       this.tranId = tranId;
@@ -77,7 +83,7 @@ public class PaymentRequest extends Transaction {
 
    @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction. This "
          + "transaction identifier is encoded within the QR Code and is to be used to associate the scan and the "
-         + "payment request.")
+         + "payment request. This should be the same as the value returned in the tranId field of the CreateQrCodeResponse.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -89,15 +95,17 @@ public class PaymentRequest extends Transaction {
    }
 
    /**
-    * A payment token received from the Partner in the ScanNotification.
+    * A payment token received from the Partner in the ScanNotification. A Partner may provide such a value in the
+    * ScanNotification so that it is included in the PaymentRequest to the partner. This field should be populated if
+    * known.
     **/
    public PaymentRequest partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "A payment token received from the Partner in the ScanNotification.")
-   @JsonProperty("qrCode")
+   @ApiModelProperty(required = false, value = "A payment token received from the Partner in the ScanNotification. A Partner may provide such a value in the ScanNotification so that it is included in the PaymentRequest to the partner. This field should be populated if known.")
+   @JsonProperty("partnerPaymentToken")
    public String getPartnerPaymentToken() {
       return partnerPaymentToken;
    }
