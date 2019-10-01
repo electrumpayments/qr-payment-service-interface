@@ -1,6 +1,8 @@
 package io.electrum.qr.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.qr.api.model.helper.Partner;
+import io.electrum.qr.api.model.helper.TranId;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicAdvice;
 import io.electrum.vas.model.Institution;
@@ -15,7 +17,7 @@ import javax.validation.constraints.NotNull;
  **/
 
 @ApiModel(description = "Confirm that a previous {@link PaymentRequest} has completed successfully at the POS.")
-public class PaymentConfirmation extends BasicAdvice {
+public class PaymentConfirmation extends BasicAdvice implements Partner, TranId {
 
    protected Institution partner = null;
    protected String tranId = null;
@@ -56,6 +58,10 @@ public class PaymentConfirmation extends BasicAdvice {
    @NotNull
    public String getTranId() {
       return tranId;
+   }
+
+   public void setTranId(String tranId) {
+      this.tranId = tranId;
    }
 
    @Override

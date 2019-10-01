@@ -1,22 +1,21 @@
 package io.electrum.qr.api.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import io.electrum.qr.api.model.helper.Partner;
+import io.electrum.qr.api.model.helper.TranId;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.joda.time.DateTime;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * A notification sent by the partner indicating that the partner received a scan of the QR code linked to the
@@ -24,7 +23,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
-public class ScanNotification {
+public class ScanNotification implements Partner, TranId {
 
    protected String id = null;
    protected DateTime time = null;

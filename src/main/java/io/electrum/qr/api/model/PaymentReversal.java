@@ -1,6 +1,8 @@
 package io.electrum.qr.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.qr.api.model.helper.Partner;
+import io.electrum.qr.api.model.helper.TranId;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicReversal;
 import io.electrum.vas.model.Institution;
@@ -16,7 +18,7 @@ import javax.validation.constraints.NotNull;
  **/
 
 @ApiModel(description = "Reverse a previous {@link PaymentRequest}. This may be due to a cancellation at the POS or because the original {@link PaymentRequest} is in an unknown state.")
-public class PaymentReversal extends BasicReversal {
+public class PaymentReversal extends BasicReversal implements Partner, TranId {
 
    protected Institution partner = null;
    protected String tranId = null;
@@ -57,6 +59,10 @@ public class PaymentReversal extends BasicReversal {
    @NotNull
    public String getTranId() {
       return tranId;
+   }
+
+   public void setTranId(String tranId) {
+      this.tranId = tranId;
    }
 
    @Override

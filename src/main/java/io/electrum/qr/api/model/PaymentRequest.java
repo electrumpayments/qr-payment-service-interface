@@ -1,12 +1,8 @@
 package io.electrum.qr.api.model;
 
-import java.util.Objects;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import io.electrum.qr.api.model.helper.Partner;
+import io.electrum.qr.api.model.helper.TranId;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
@@ -14,12 +10,16 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Objects;
+
 /**
  * A request to effect a payment with a linked QR code scan.
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
-public class PaymentRequest extends Transaction {
+public class PaymentRequest extends Transaction implements Partner, TranId {
 
    protected Institution partner = null;
    protected Amounts amounts = null;
