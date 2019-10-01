@@ -1,8 +1,8 @@
 package io.electrum.qr.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.qr.api.model.helper.Partner;
-import io.electrum.qr.api.model.helper.TranId;
+import io.electrum.qr.api.model.helper.PartnerField;
+import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicAdvice;
 import io.electrum.vas.model.Institution;
@@ -10,14 +10,13 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 /**
  * Confirm that a previous {@link PaymentRequest} has completed successfully at the POS.
  **/
 
 @ApiModel(description = "Confirm that a previous {@link PaymentRequest} has completed successfully at the POS.")
-public class PaymentConfirmation extends BasicAdvice implements Partner, TranId {
+public class PaymentConfirmation extends BasicAdvice implements PartnerField, TranIdField {
 
    protected Institution partner = null;
    protected String tranId = null;

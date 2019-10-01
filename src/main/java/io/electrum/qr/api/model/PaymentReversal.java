@@ -3,11 +3,10 @@ package io.electrum.qr.api.model;
 import java.util.Objects;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.qr.api.model.helper.Partner;
-import io.electrum.qr.api.model.helper.TranId;
+import io.electrum.qr.api.model.helper.PartnerField;
+import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.BasicReversal;
 import io.electrum.vas.model.Institution;
@@ -20,7 +19,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "Reverse a previous {@link PaymentRequest}. This may be due to a cancellation at the POS or because the original {@link PaymentRequest} is in an unknown state.")
-public class PaymentReversal extends BasicReversal implements Partner, TranId {
+public class PaymentReversal extends BasicReversal implements PartnerField, TranIdField {
 
    protected Institution partner = null;
    protected String tranId = null;

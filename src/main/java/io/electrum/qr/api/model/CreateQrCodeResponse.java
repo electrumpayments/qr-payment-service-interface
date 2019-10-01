@@ -1,8 +1,8 @@
 package io.electrum.qr.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.qr.api.model.helper.QrCode;
-import io.electrum.qr.api.model.helper.TranId;
+import io.electrum.qr.api.model.helper.QrCodeField;
+import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
@@ -24,7 +24,7 @@ import java.util.Objects;
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
-public class CreateQrCodeResponse implements TranId, QrCode {
+public class CreateQrCodeResponse implements TranIdField, QrCodeField {
 
    protected String id = null;
    protected DateTime time = null;

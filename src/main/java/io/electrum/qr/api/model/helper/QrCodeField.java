@@ -1,6 +1,6 @@
 package io.electrum.qr.api.model.helper;
 
-public interface QrCode {
+public interface QrCodeField {
    String getQrCode();
 
    void setQrCode(String qrCode);
