@@ -30,14 +30,15 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
    protected String partnerPaymentToken = null;
 
    /**
-    * Data relating to the entity who will process the payment.
+    * Data relating to the entity who processed the PaymentRequest. This identifies the entity who provided the
+    * ScanNotification for the QR code associated with this payment.
     **/
    public PaymentResponse partner(Institution partner) {
       this.partner = partner;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @ApiModelProperty(required = true, value = "Data relating to the entity who processed the PaymentRequest. This identifies the entity who provided the ScanNotification for the QR code associated with this payment.")
    @JsonProperty("partner")
    @Valid
    @NotNull
@@ -58,14 +59,15 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
    }
 
    /**
-    * An array of tenders used to pay for the transaction
+    * An array of tenders used to pay for the transaction. This may be used to describe the payment which was effected
+    * as a result of the QR code scan e.g. the card detail ultimately used for the payment.
     **/
    public PaymentResponse tenders(List<Tender> tenders) {
       this.tenders = tenders;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "An array of tenders used to pay for the transaction.")
+   @ApiModelProperty(required = false, value = "An array of tenders used to pay for the transaction. This may be used to describe the payment which was effected as a result of the QR code scan e.g. the card detail ultimately used for the payment.")
    @JsonProperty("tenders")
    public List<Tender> getTenders() {
       return tenders;
@@ -74,7 +76,6 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
    public void setTenders(List<Tender> tenders) {
       this.tenders = tenders;
    }
-
 
    @ApiModelProperty(required = true, value = "The amounts pertaining to the transaction.")
    @JsonProperty("amounts")
@@ -90,7 +91,8 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
 
    /**
     * The unique transaction identifier related to this transaction. This transaction identifier is encoded within the
-    * QR Code and is to be used to associate the scan and the payment request.
+    * QR Code and is to be used to associate the scan and the payment request. This value should be the same as the
+    * value returned in the CreateQrCodeResponse which described the associated QR code.
     **/
    public PaymentResponse tranId(String tranId) {
       this.tranId = tranId;
@@ -99,7 +101,7 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
 
    @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction. This "
          + "transaction identifier is encoded within the QR Code and is to be used to associate the scan and the "
-         + "payment request.")
+         + "payment request. This value should be the same as the value returned in the CreateQrCodeResponse which described the associated QR code.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -119,7 +121,7 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
    }
 
    @ApiModelProperty(required = false, value = "A payment token received from the Partner in the ScanNotification.")
-   @JsonProperty("qrCode")
+   @JsonProperty("partnerPaymentToken")
    public String getPartnerPaymentToken() {
       return partnerPaymentToken;
    }
@@ -138,8 +140,7 @@ public class PaymentResponse extends Transaction implements Partner, TranId {
          return false;
       PaymentResponse request = (PaymentResponse) o;
       return Objects.equals(amounts, request.amounts) && Objects.equals(partner, request.partner)
-            && Objects.equals(tenders, request.tenders)
-            && Objects.equals(tranId, request.tranId)
+            && Objects.equals(tenders, request.tenders) && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
    }
 

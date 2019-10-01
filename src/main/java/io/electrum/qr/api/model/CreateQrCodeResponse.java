@@ -80,14 +80,14 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
+    * Data relating to the originator of the request.
     **/
    public CreateQrCodeResponse originator(Originator originator) {
       this.originator = originator;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @ApiModelProperty(required = true, value = "Data relating to the originator of the request.")
    @JsonProperty("originator")
    @Valid
    @NotNull
@@ -100,14 +100,14 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
+    * Data relating to the sender of the original CreateQrCodeRequest.
     **/
    public CreateQrCodeResponse client(Institution client) {
       this.client = client;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
+   @ApiModelProperty(required = true, value = "Data relating to the sender of the original CreateQrCodeRequest.")
    @JsonProperty("client")
    @Valid
    @NotNull
@@ -139,14 +139,14 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * The transaction identifier encoded within the QR Code which was scanned.
+    * This is a reference set by the original source of the request.
     **/
    public CreateQrCodeResponse rrn(String rrn) {
       this.rrn = rrn;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The transaction identifier encoded within the QR Code which was scanned.")
+   @ApiModelProperty(required = false, value = "This is a reference set by the original source of the request.")
    @JsonProperty("rrn")
    public String getRrn() {
       return rrn;
@@ -157,14 +157,14 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * The transaction identifier encoded within the QR Code which was scanned.
+    * The System Trace Audit Number can be used to locate transactions across different systems.
     **/
    public CreateQrCodeResponse stan(String stan) {
       this.stan = stan;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The transaction identifier encoded within the QR Code which was scanned.")
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across different systems.")
    @JsonProperty("stan")
    public String getStan() {
       return stan;
@@ -175,14 +175,14 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * The amounts pertaining to the QR code which was scanned.
+    * The amounts pertaining to the QR code which was created.
     **/
    public CreateQrCodeResponse amounts(Amounts amounts) {
       this.amounts = amounts;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was scanned.")
+   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was created.")
    @JsonProperty("amounts")
    @Valid
    public Amounts getAmounts() {
@@ -201,7 +201,7 @@ public class CreateQrCodeResponse implements TranId, QrCode {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The transaction identifier encoded within the QR Code which was scanned.")
+   @ApiModelProperty(required = true, value = "The transaction identifier encoded within the QR Code which was scanned. This value must be provided in subsequent pay and reversePayment operations.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -213,15 +213,15 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    }
 
    /**
-    * A payment token received from the partner in the ScanNotification. If supplied by the partner then it will be
-    * echoed in the PaymentRequest to the partner.
+    * The full set of data to be encoded in the graphical QR code. The data is provided as an EMVCo compliant string.
+    * This value must be provided in subsequent pay and reversePayment operations.
     **/
    public CreateQrCodeResponse qrCode(String qrCode) {
       this.qrCode = qrCode;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "A payment token received from the Partner in the ScanNotification.")
+   @ApiModelProperty(required = true, value = "The full set of data to be encoded in the graphical QR code. The data is provided as an EMVCo compliant string.")
    @JsonProperty("qrCode")
    @NotNull
    public String getQrCode() {
@@ -267,7 +267,7 @@ public class CreateQrCodeResponse implements TranId, QrCode {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class CreateQrCodeRequest {\n");
+      sb.append("class CreateQrCodeResponse {\n");
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
@@ -280,7 +280,6 @@ public class CreateQrCodeResponse implements TranId, QrCode {
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("    qrCode: ").append(Utils.toIndentedString(qrCode)).append("\n");
       sb.append("}");
-      sb.append(super.toString());
       return sb.toString();
    }
 }

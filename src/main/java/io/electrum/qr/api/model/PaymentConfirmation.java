@@ -23,17 +23,16 @@ public class PaymentConfirmation extends BasicAdvice implements Partner, TranId 
    protected String tranId = null;
 
    /**
-    * Data relating to the entity who will process the payment.
+    * Data relating to the entity to which the original PaymentRequest was submitted.
     **/
    public PaymentConfirmation partner(Institution partner) {
       this.partner = partner;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "Data relating to the entity who will process the payment.")
+   @ApiModelProperty(required = false, value = "Data relating to the entity to which the original PaymentRequest was submitted.")
    @JsonProperty("partner")
    @Valid
-   @NotNull
    public Institution getPartner() {
       return partner;
    }
@@ -55,7 +54,6 @@ public class PaymentConfirmation extends BasicAdvice implements Partner, TranId 
          + "transaction identifier was encoded within the QR Code and used to associate the scan and the "
          + "payment request.")
    @JsonProperty("tranId")
-   @NotNull
    public String getTranId() {
       return tranId;
    }
@@ -69,15 +67,10 @@ public class PaymentConfirmation extends BasicAdvice implements Partner, TranId 
       StringBuilder sb = new StringBuilder();
       sb.append("class PaymentConfirmation {\n");
 
-      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
-      sb.append("    requestId: ").append(Utils.toIndentedString(requestId)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append("\n");
-      sb.append("    stan: ").append(Utils.toIndentedString(stan)).append("\n");
       sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("}");
+      sb.append(super.toString());
       return sb.toString();
    }
 }

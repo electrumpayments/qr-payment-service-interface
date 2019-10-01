@@ -32,20 +32,18 @@ public class ErrorDetail {
       TRANSACTION_NOT_SUPPORTED("TRANSACTION_NOT_SUPPORTED"),
       UNABLE_TO_LOCATE_RECORD("UNABLE_TO_LOCATE_RECORD"),
       UPSTREAM_UNAVAILABLE("UPSTREAM_UNAVAILABLE"),
-      INVALID_PRODUCT("INVALID_PRODUCT"),
       ACCOUNT_ALREADY_SETTLED("ACCOUNT_ALREADY_SETTLED"),
       INVALID_MERCHANT("INVALID_MERCHANT"),
-      OUT_OF_STOCK("OUT_OF_STOCK"),
-      INVALID_AN32_TOKEN("INVALID_AN32_TOKEN"),
       DO_NOT_HONOR("DO_NOT_HONOR"),
-      DECLINED_BY_MNO("DECLINED_BY_MNO"),
-      INVALID_MSISDN("INVALID_MSISDN"),
-      INVALID_LOYALTY_CARD("INVALID_LOYALTY_CARD"),
+      DECLINED_BY_PARTNER("DECLINED_BY_PARTNER"),
+      DECLINED_BY_ACQUIRER("DECLINED_BY_ACQUIRER"),
+      DECLINED_BY_ISSUER("DECLINED_BY_ISSUER"),
       INSUFFICIENT_FUNDS("INSUFFICIENT_FUNDS"),
       INVALID_CARD_NUMBER("INVALID_CARD_NUMBER"),
       CARD_EXPIRED("CARD_EXPIRED"),
-      INCORRECT_PIN("INCORRECT_PIN"),
-      PIN_ATTEMPTS_EXCEEDED("PIN_ATTEMPTS_EXCEEDED");
+      INVALID_TRAN_ID("INVALID_TRAN_ID"),
+      PARTNER_UNKNOWN("PARTNER_UNKNOWN"),
+      NO_SCAN_RECEIVED("NO_SCAN_RECEIVED");
 
       private String value;
 
@@ -60,42 +58,15 @@ public class ErrorDetail {
       }
    }
 
-   /**
-    * The following request types are recognised
-    */
-   public enum RequestType {
-      VOUCHER_REQUEST("VOUCHER_REQUEST"),
-      VOUCHER_REVERSAL("VOUCHER_REVERSAL"),
-      VOUCHER_CONFIRMATION("VOUCHER_CONFIRMATION"),
-      VOUCHER_VOID("VOUCHER_VOID"),
-      MSISDN_INFO_REQUEST("MSISDN_INFO_REQUEST"),
-      PURCHASE_REQUEST("PURCHASE_REQUEST"),
-      PURCHASE_CONFIRMATION("PURCHASE_CONFIRMATION"),
-      PURCHASE_STATUS_REQUEST("PURCHASE_STATUS_REQUEST"),
-      PURCHASE_REVERSAL("PURCHASE_REVERSAL");
-
-      private String value;
-
-      RequestType(String value) {
-         this.value = value;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
-   }
-
    private String id;
    private String originalId;
    private ErrorType errorType = null;
    private String errorMessage = null;
-   private RequestType requestType = null;
    private Object detailMessage = null;
    private String providerErrorCode = null;
    private String providerErrorMsg = null;
    private String providerRef = null;
+   private String tranId = null;
 
    /**
     * The randomly generated UUID identifying this errorDetail, as defined for a variant 4 UUID in [RFC
@@ -135,25 +106,6 @@ public class ErrorDetail {
 
    public void setOriginalId(String originalId) {
       this.originalId = originalId;
-   }
-
-   /**
-    * The type of error that occurred
-    **/
-   public ErrorDetail requestType(RequestType requestType) {
-      this.requestType = requestType;
-      return this;
-   }
-
-   @ApiModelProperty(required = true, value = "The type of request that preceeded the error")
-   @JsonProperty("requestType")
-   @NotNull
-   public RequestType getRequestType() {
-      return requestType;
-   }
-
-   public void setRequestType(RequestType requestType) {
-      this.requestType = requestType;
    }
 
    /**
@@ -271,6 +223,29 @@ public class ErrorDetail {
       this.providerRef = providerRef;
    }
 
+   /**
+    * The unique transaction identifier related to this transaction. This transaction identifier is encoded within the
+    * QR Code and is to be used to associate the scan and the payment request. This is the value returned in the tranId
+    * field of the CreateQrCodeResponse or provided in the ScanNotification.
+    */
+   public ErrorDetail tranId(String tranId) {
+      this.tranId = tranId;
+      return this;
+   }
+
+   @JsonProperty("tranId")
+   @ApiModelProperty(value = "The unique transaction identifier related to this transaction. This "
+         + "transaction identifier is encoded within the QR Code and is to be used to associate the scan and the "
+         + "payment request. This should be the same as the value returned in the tranId field of the CreateQrCodeResponse "
+         + "or provided in the ScanNotification.")
+   public String getTranId() {
+      return tranId;
+   }
+
+   public void setTranId(String tranId) {
+      this.tranId = tranId;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o) {
@@ -284,7 +259,7 @@ public class ErrorDetail {
             && Objects.equals(detailMessage, errorDetail.detailMessage)
             && Objects.equals(providerErrorCode, errorDetail.providerErrorCode)
             && Objects.equals(providerErrorMsg, errorDetail.providerErrorMsg)
-            && Objects.equals(providerRef, errorDetail.providerRef);
+            && Objects.equals(providerRef, errorDetail.providerRef) && Objects.equals(tranId, errorDetail.tranId);
    }
 
    @Override
@@ -294,11 +269,11 @@ public class ErrorDetail {
             originalId,
             errorType,
             errorMessage,
-            requestType,
             detailMessage,
             providerErrorCode,
             providerErrorMsg,
-            providerRef);
+            providerRef,
+            tranId);
    }
 
    @Override
@@ -310,11 +285,11 @@ public class ErrorDetail {
       sb.append("    originalId: ").append(Utils.toIndentedString(originalId)).append("\n");
       sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append("\n");
       sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append("\n");
-      sb.append("    requestType: ").append(Utils.toIndentedString(requestType)).append("\n");
       sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append("\n");
       sb.append("    providerErrorCode: ").append(Utils.toIndentedString(providerErrorCode)).append("\n");
       sb.append("    providerErrorMsg: ").append(Utils.toIndentedString(providerErrorMsg)).append("\n");
       sb.append("    providerRef: ").append(Utils.toIndentedString(providerRef)).append("\n");
+      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("}");
       return sb.toString();
    }

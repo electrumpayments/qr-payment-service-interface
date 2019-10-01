@@ -1,25 +1,26 @@
 package io.electrum.qr.api.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import io.electrum.qr.api.model.helper.Partner;
-import io.electrum.qr.api.model.helper.TranId;
-import io.electrum.vas.Utils;
-import io.electrum.vas.model.Amounts;
-import io.electrum.vas.model.Institution;
-import io.electrum.vas.model.ThirdPartyIdentifier;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.joda.time.DateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import io.electrum.qr.api.model.helper.Partner;
+import io.electrum.qr.api.model.helper.TranId;
+import io.electrum.vas.Utils;
+import io.electrum.vas.model.Institution;
+import io.electrum.vas.model.ThirdPartyIdentifier;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 /**
- * A notification sent by the partner indicating that the partner received a scan of the QR code linked to the
- * transaction ID.
+ * A notification sent by the Partner indicating that the Partner received a scan of the QR code linked to the
+ * transaction ID. Any PaymentRequest with a matching tranId value should be forwarded to the Partner for processing.
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
@@ -27,15 +28,13 @@ public class ScanNotification implements Partner, TranId {
 
    protected String id = null;
    protected DateTime time = null;
-   protected Institution settlementEntity = null;
    protected Institution partner = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
-   protected Amounts amounts = null;
    protected String tranId = null;
    protected String partnerPaymentToken = null;
 
    /**
-    * The randomly generated UUID identifying this notification. THis may be a variant 3 or 4 as defined in [RFC
+    * The randomly generated UUID identifying this notification. This may be a variant 3 or 4 as defined in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
    public ScanNotification id(String id) {
@@ -43,7 +42,7 @@ public class ScanNotification implements Partner, TranId {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this notification. THis may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
+   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this notification. This may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
    public String getId() {
@@ -77,34 +76,14 @@ public class ScanNotification implements Partner, TranId {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
-    **/
-   public ScanNotification settlementEntity(Institution settlementEntity) {
-      this.settlementEntity = settlementEntity;
-      return this;
-   }
-
-   @ApiModelProperty(required = false, value = "Data relating to the entity with whom the Merchant will settle the transaction.")
-   @JsonProperty("settlementEntity")
-   @Valid
-   @NotNull
-   public Institution getSettlementEntity() {
-      return settlementEntity;
-   }
-
-   public void setSettlementEntity(Institution settlementEntity) {
-      this.settlementEntity = settlementEntity;
-   }
-
-   /**
-    * Data relating to the entity who will process the payment.
+    * Data relating to the entity who should receive associated PaymentRequest messages with a matching tranId value.
     **/
    public ScanNotification partner(Institution partner) {
       this.partner = partner;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who will process the payment.")
+   @ApiModelProperty(required = true, value = "Data relating to the entity who should receive associated PaymentRequest messages with a matching tranId value.")
    @JsonProperty("partner")
    @Valid
    @NotNull
@@ -124,7 +103,7 @@ public class ScanNotification implements Partner, TranId {
       return this;
    }
 
-   @ApiModelProperty(value = "An array of identifiers which each identify the transaction within each entity's system.")
+   @ApiModelProperty(value = "An array of identifiers which identify the transaction within each entity's system.")
    @JsonProperty("thirdPartyIdentifiers")
    @Valid
    public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
@@ -133,25 +112,6 @@ public class ScanNotification implements Partner, TranId {
 
    public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
-   }
-
-   /**
-    * The amounts pertaining to the QR code which was scanned.
-    **/
-   public ScanNotification amounts(Amounts amounts) {
-      this.amounts = amounts;
-      return this;
-   }
-
-   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was scanned.")
-   @JsonProperty("amounts")
-   @Valid
-   public Amounts getAmounts() {
-      return amounts;
-   }
-
-   public void setAmounts(Amounts amounts) {
-      this.amounts = amounts;
    }
 
    /**
@@ -174,16 +134,16 @@ public class ScanNotification implements Partner, TranId {
    }
 
    /**
-    * A payment token received from the partner in the ScanNotification. If supplied by the partner then it will be
-    * echoed in the PaymentRequest to the partner.
+    * A payment token received from the partner in the ScanNotification. If supplied by the Partner then it will be
+    * echoed in the PaymentRequest to the Partner.
     **/
    public ScanNotification partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "A payment token received from the Partner in the ScanNotification.")
-   @JsonProperty("qrCode")
+   @ApiModelProperty(required = false, value = "A payment token received from the partner in the ScanNotification. If supplied by the Partner then it will be echoed in the PaymentRequest to the Partner.")
+   @JsonProperty("partnerPaymentToken")
    public String getPartnerPaymentToken() {
       return partnerPaymentToken;
    }
@@ -202,24 +162,15 @@ public class ScanNotification implements Partner, TranId {
          return false;
       ScanNotification request = (ScanNotification) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
-            && Objects.equals(settlementEntity, request.settlementEntity) && Objects.equals(partner, request.partner)
+            && Objects.equals(partner, request.partner)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers)
-            && Objects.equals(amounts, request.amounts) && Objects.equals(tranId, request.tranId)
+            && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(
-            super.hashCode(),
-            id,
-            time,
-            settlementEntity,
-            partner,
-            thirdPartyIdentifiers,
-            amounts,
-            tranId,
-            partnerPaymentToken);
+      return Objects.hash(super.hashCode(), id, time, partner, thirdPartyIdentifiers, tranId, partnerPaymentToken);
    }
 
    @Override
@@ -229,14 +180,11 @@ public class ScanNotification implements Partner, TranId {
 
       sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
       sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
-      sb.append("    qrCode: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
+      sb.append("    partnerPaymentToken: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
       sb.append("}");
-      sb.append(super.toString());
       return sb.toString();
    }
 }
