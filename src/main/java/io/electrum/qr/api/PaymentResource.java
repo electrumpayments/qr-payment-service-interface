@@ -5,7 +5,6 @@ import io.electrum.qr.api.model.PaymentConfirmation;
 import io.electrum.qr.api.model.PaymentRequest;
 import io.electrum.qr.api.model.PaymentResponse;
 import io.electrum.qr.api.model.PaymentReversal;
-import io.electrum.vas.model.BasicAdvice;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
