@@ -1,5 +1,18 @@
 package io.electrum.qr.api;
 
+import io.electrum.qr.api.model.ErrorDetail;
+import io.electrum.qr.api.model.PaymentConfirmation;
+import io.electrum.qr.api.model.PaymentRequest;
+import io.electrum.qr.api.model.PaymentResponse;
+import io.electrum.qr.api.model.PaymentReversal;
+import io.electrum.vas.model.BasicAdvice;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.Authorization;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -14,19 +27,6 @@ import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
-
-import io.electrum.qr.api.model.ErrorDetail;
-import io.electrum.qr.api.model.PaymentConfirmation;
-import io.electrum.qr.api.model.PaymentRequest;
-import io.electrum.qr.api.model.PaymentResponse;
-import io.electrum.qr.api.model.PaymentReversal;
-import io.electrum.vas.model.BasicAdvice;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import io.swagger.annotations.Authorization;
 
 @Path(PaymentResource.RESOURCE_PATH)
 @Api(description = "the QR NotifyScan Service Interface API", authorizations = { @Authorization("httpBasic") })
@@ -67,7 +67,7 @@ public abstract class PaymentResource {
    @Produces({ "application/json" })
    @ApiOperation(nickname = ConfirmPayment.PAYMENT_CONFIRMATION, value = "Confirm completion of tender initiated by a payment request.", notes = "Confirm that the payment previously authorised has now been completed by the merchant and the customer has their goods.")
    @ApiResponses(value = {
-         @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = BasicAdvice.class),
+         @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = PaymentConfirmation.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 404, message = "Not Found", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
