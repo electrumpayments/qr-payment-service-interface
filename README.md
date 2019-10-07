@@ -1,6 +1,6 @@
 # QR Payment Service Interface
 
-The QR Payment Service Interface documents the messaging interface used by Electrum to connect acquirers, processors, and mobile network operators together for performing payments using the EMVCo QR specification.
+The QR Payment Service Interface documents the messaging interface used by Electrum to connect acquirers, processors, and mobile network operators together for performing payments using a variant of the EMVCo QR specification.
 
 You can find documentation for this project [here](https://electrumpayments.github.io/qr-payment-service-interface-docs/).
 

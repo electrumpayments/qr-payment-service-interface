@@ -1,6 +1,14 @@
 package io.electrum.qr.api.model;
 
+import java.util.List;
+import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
+import org.joda.time.DateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.qr.api.model.helper.QrCodeField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
@@ -10,13 +18,6 @@ import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.joda.time.DateTime;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * A notification sent by the partner indicating that the partner received a scan of the QR code linked to the
@@ -24,173 +25,57 @@ import java.util.Objects;
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code scan.")
-public class CreateQrCodeResponse implements TranIdField, QrCodeField {
+public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdField, QrCodeField {
 
-   protected String id = null;
-   protected DateTime time = null;
-   protected Originator originator = null;
-   protected Institution client = null;
-   protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<ThirdPartyIdentifier>();
-   protected String rrn = null;
-   protected String stan = null;
-   protected Amounts amounts = null;
    protected String tranId = null;
    protected String qrCode = null;
 
-   /**
-    * The randomly generated UUID identifying this notification. This may be a variant 3 or 4 as defined in [RFC
-    * 4122](https://tools.ietf.org/html/rfc4122)
-    **/
+   @Override
    public CreateQrCodeResponse id(String id) {
-      this.id = id;
+      super.id(id);
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this notification. THis may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
-   @JsonProperty("id")
-   @NotNull
-   public String getId() {
-      return id;
-   }
-
-   public void setId(String id) {
-      this.id = id;
-   }
-
-   /**
-    * The date and time of the message in UTC, as recorded by the sender. The format shall be as defined for date-time
-    * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
-    * time-secfrac be included up to millisecond precision
-    **/
+   @Override
    public CreateQrCodeResponse time(DateTime time) {
-      this.time = time;
+      super.time(time);
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
-   @JsonProperty("time")
-   @NotNull
-   @Valid
-   public DateTime getTime() {
-      return time;
-   }
-
-   public void setTime(DateTime time) {
-      this.time = time;
-   }
-
-   /**
-    * Data relating to the originator of the request.
-    **/
+   @Override
    public CreateQrCodeResponse originator(Originator originator) {
-      this.originator = originator;
+      super.originator(originator);
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the originator of the request.")
-   @JsonProperty("originator")
-   @Valid
-   @NotNull
-   public Originator getOriginator() {
-      return originator;
-   }
-
-   public void setOriginator(Originator originator) {
-      this.originator = originator;
-   }
-
-   /**
-    * Data relating to the sender of the original CreateQrCodeRequest.
-    **/
+   @Override
    public CreateQrCodeResponse client(Institution client) {
-      this.client = client;
+      super.client(client);
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the sender of the original CreateQrCodeRequest.")
-   @JsonProperty("client")
-   @Valid
-   @NotNull
-   public Institution getClient() {
-      return client;
-   }
-
-   public void setClient(Institution client) {
-      this.client = client;
-   }
-
-   /**
-    * An array of identifiers which identify the transaction within each entity's system.
-    **/
-   public CreateQrCodeResponse thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
-      this.thirdPartyIdentifiers = transactionIdentifiers;
+   @Override
+   public CreateQrCodeResponse thirdPartyIdentifiers(List<ThirdPartyIdentifier> thirdPartyIdentifiers) {
+      super.thirdPartyIdentifiers(thirdPartyIdentifiers);
       return this;
    }
 
-   @ApiModelProperty(value = "An array of identifiers which each identify the transaction within each entity's system.")
-   @JsonProperty("thirdPartyIdentifiers")
-   @Valid
-   public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
-      return thirdPartyIdentifiers;
-   }
-
-   public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
-      this.thirdPartyIdentifiers = transactionIdentifiers;
-   }
-
-   /**
-    * This is a reference set by the original source of the request.
-    **/
+   @Override
    public CreateQrCodeResponse rrn(String rrn) {
-      this.rrn = rrn;
+      super.rrn(rrn);
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "This is a reference set by the original source of the request.")
-   @JsonProperty("rrn")
-   public String getRrn() {
-      return rrn;
-   }
-
-   public void setRrn(String rrn) {
-      this.rrn = rrn;
-   }
-
-   /**
-    * The System Trace Audit Number can be used to locate transactions across different systems.
-    **/
+   @Override
    public CreateQrCodeResponse stan(String stan) {
-      this.stan = stan;
+      super.stan(stan);
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across different systems.")
-   @JsonProperty("stan")
-   public String getStan() {
-      return stan;
-   }
-
-   public void setStan(String stan) {
-      this.tranId = stan;
-   }
-
-   /**
-    * The amounts pertaining to the QR code which was created.
-    **/
+   @Override
    public CreateQrCodeResponse amounts(Amounts amounts) {
-      this.amounts = amounts;
+      super.amounts(amounts);
       return this;
-   }
-
-   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was created.")
-   @JsonProperty("amounts")
-   @Valid
-   public Amounts getAmounts() {
-      return amounts;
-   }
-
-   public void setAmounts(Amounts amounts) {
-      this.amounts = amounts;
    }
 
    /**

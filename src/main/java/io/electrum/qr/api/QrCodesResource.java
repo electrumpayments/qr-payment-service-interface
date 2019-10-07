@@ -36,7 +36,7 @@ public abstract class QrCodesResource {
 
    public class CreateQrCode {
       public static final String CREATE_QR_CODE = "createQrCode";
-      public static final int SUCCESS = 200;
+      public static final int SUCCESS = 201;
       public static final String PATH = "/";
       public static final String RELATIVE_PATH = PATH;
       public static final String FULL_PATH = QrCodesResource.PATH + RELATIVE_PATH;
