@@ -27,7 +27,7 @@ public class ScanNotification implements PartnerField, TranIdField {
    protected String id = null;
    protected DateTime time = null;
    protected Institution partner = null;
-   protected Institution settlementEntity = null;
+   protected Institution receiver = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<>();
    protected String tranId = null;
    protected String partnerPaymentToken = null;
@@ -95,22 +95,22 @@ public class ScanNotification implements PartnerField, TranIdField {
    }
 
    /**
-    * Data relating to the entity with whom the Merchant will settle the transaction.
+    * Data relating to the entity which ultimately processes the request.
     **/
-   public ScanNotification settlementEntity(Institution settlementEntity) {
-      this.settlementEntity = settlementEntity;
+   public ScanNotification receiver(Institution receiver) {
+      this.receiver = receiver;
       return this;
    }
 
-   @ApiModelProperty(value = "Data relating to the entity with whom the Merchant will settle the transaction.")
-   @JsonProperty("settlementEntity")
+   @ApiModelProperty(value = "Data relating to the entity which ultimately processes the request.")
+   @JsonProperty("receiver")
    @Valid
-   public Institution getSettlementEntity() {
-      return settlementEntity;
+   public Institution getReceiver() {
+      return receiver;
    }
 
-   public void setSettlementEntity(Institution settlementEntity) {
-      this.settlementEntity = settlementEntity;
+   public void setReceiver(Institution receiver) {
+      this.receiver = receiver;
    }
 
    /**
