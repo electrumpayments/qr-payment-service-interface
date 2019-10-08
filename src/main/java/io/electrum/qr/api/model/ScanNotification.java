@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.model.Amounts;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -33,6 +34,7 @@ public class ScanNotification implements PartnerField, TranIdField {
    protected Institution settlementEntity = null;
    protected Institution receiver = null;
    protected List<ThirdPartyIdentifier> thirdPartyIdentifiers = new ArrayList<>();
+   protected Amounts amounts = null;
    protected String tranId = null;
    protected String partnerPaymentToken = null;
 
@@ -156,6 +158,25 @@ public class ScanNotification implements PartnerField, TranIdField {
    }
 
    /**
+    * The amounts pertaining to the QR code which was scanned.
+    **/
+   public ScanNotification amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was scanned.")
+   @JsonProperty("amounts")
+   @Valid
+   public Amounts getAmounts() {
+      return amounts;
+   }
+
+   public void setAmounts(Amounts amounts) {
+      this.amounts = amounts;
+   }
+
+   /**
     * The transaction identifier encoded within the QR Code which was scanned.
     **/
    public ScanNotification tranId(String tranId) {
@@ -204,7 +225,7 @@ public class ScanNotification implements PartnerField, TranIdField {
       ScanNotification request = (ScanNotification) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
             && Objects.equals(partner, request.partner) && Objects.equals(settlementEntity, request.settlementEntity)
-            && Objects.equals(receiver, request.receiver)
+            && Objects.equals(receiver, request.receiver) && Objects.equals(amounts, request.amounts)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers)
             && Objects.equals(tranId, request.tranId)
             && Objects.equals(partnerPaymentToken, request.partnerPaymentToken);
@@ -220,6 +241,7 @@ public class ScanNotification implements PartnerField, TranIdField {
             settlementEntity,
             receiver,
             thirdPartyIdentifiers,
+            amounts,
             tranId,
             partnerPaymentToken);
    }
@@ -235,6 +257,7 @@ public class ScanNotification implements PartnerField, TranIdField {
       sb.append("    settlementEntity: ").append(Utils.toIndentedString(settlementEntity)).append("\n");
       sb.append("    receiver: ").append(Utils.toIndentedString(receiver)).append("\n");
       sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
       sb.append("    partnerPaymentToken: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
       sb.append("}");
