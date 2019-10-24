@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Represents the outcome of a completed transaction
+ * Describes a failed the outcome of an operation.
  **/
-@ApiModel(description = "Represents the outcome of a completed transaction")
+@ApiModel(description = "Describes a failed the outcome of an operation.")
 public class ErrorDetail {
 
    /**
@@ -71,7 +71,7 @@ public class ErrorDetail {
 
    /**
     * The randomly generated UUID identifying this errorDetail, as defined for a variant 4 UUID in [RFC
-    * 4122](https://tools.ietf.org/html/rfc4122)
+    * 4122](https://tools.ietf.org/html/rfc4122).
     */
    public ErrorDetail id(String id) {
       this.id = id;
@@ -79,7 +79,7 @@ public class ErrorDetail {
    }
 
    @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this errorDetail, as defined for"
-         + " a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
+         + " a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).")
    @JsonProperty("id")
    @NotNull
    @Length(max = 20)
@@ -92,14 +92,14 @@ public class ErrorDetail {
    }
 
    /**
-    * The UUID of the original request message in the case of an error occurring for an advice message
+    * The UUID of the original request message in the case of an error occurring for an advice message.
     */
    public ErrorDetail originalId(String originalId) {
       this.originalId = originalId;
       return this;
    }
 
-   @ApiModelProperty(value = "The UUID of the original request message in the case of an error occurring for an advice message")
+   @ApiModelProperty(value = "The UUID of the original request message in the case of an error occurring for an advice message.")
    @JsonProperty("originalId")
    public String getOriginalId() {
       return originalId;
@@ -110,14 +110,14 @@ public class ErrorDetail {
    }
 
    /**
-    * The type of error that occurred
+    * The type of error that occurred. This value should be used for programmatic handling of errors.
     **/
    public ErrorDetail errorType(ErrorType errorType) {
       this.errorType = errorType;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The type of error that occurred")
+   @ApiModelProperty(required = true, value = "The type of error that occurred. This value should be used for programmatic handling of errors.")
    @JsonProperty("errorType")
    @NotNull
    public ErrorType getErrorType() {
@@ -129,17 +129,17 @@ public class ErrorDetail {
    }
 
    /**
-    * A short description of the error
+    * A short description of the error. This value should be suitable for display to an operator.
     **/
    public ErrorDetail errorMessage(String errorMessage) {
       this.errorMessage = errorMessage;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "A short description of the error")
+   @ApiModelProperty(required = true, value = "A short description of the error. This value should be suitable for display to an operator.")
    @JsonProperty("errorMessage")
    @NotNull
-   @Length(max = 20)
+   @Length(max = 40)
    public String getErrorMessage() {
       return errorMessage;
    }
@@ -149,14 +149,15 @@ public class ErrorDetail {
    }
 
    /**
-    * A free form detailed description of a particular failure condition may optionally be supplied
+    * A free form detailed description of a particular failure condition may optionally be supplied. This information is
+    * intended for informational purposes only when investigating the cause of a failure.
     **/
    public ErrorDetail detailMessage(Object detailMessage) {
       this.detailMessage = detailMessage;
       return this;
    }
 
-   @ApiModelProperty(value = "A free form detailed description of a particular failure condition may optionally be supplied")
+   @ApiModelProperty(value = "A free form detailed description of a particular failure condition may optionally be supplied. This information is intended for informational purposes only when investigating the cause of a failure.")
    @JsonProperty("detailMessage")
    public Object getDetailMessage() {
       return detailMessage;
@@ -167,9 +168,9 @@ public class ErrorDetail {
    }
 
    /**
-    * The error code returned by the service provider. Note that this should be used for informational purposes only.
-    * Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of
-    * responses.
+    * The error code returned by the service provider if available. Note that this should be used for informational
+    * purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent
+    * set of responses.
     **/
    public ErrorDetail providerErrorCode(String providerErrorCode) {
       this.providerErrorCode = providerErrorCode;
@@ -177,7 +178,7 @@ public class ErrorDetail {
    }
 
    @JsonProperty("providerErrorCode")
-   @ApiModelProperty(value = "The error code returned by the service provider. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
+   @ApiModelProperty(value = "The error code returned by the service provider if available. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
    public String getProviderErrorCode() {
       return providerErrorCode;
    }
@@ -187,9 +188,9 @@ public class ErrorDetail {
    }
 
    /**
-    * The error message returned by the service provider. Note that this should be used for informational purposes only.
-    * Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of
-    * responses.
+    * The error message returned by the service provider if available. Note that this should be used for informational
+    * purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent
+    * set of responses.
     */
    public ErrorDetail providerErrorMsg(String providerErrorMsg) {
       this.providerErrorMsg = providerErrorMsg;
@@ -197,7 +198,7 @@ public class ErrorDetail {
    }
 
    @JsonProperty("providerErrorMsg")
-   @ApiModelProperty(value = "The error message returned by the service provider. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
+   @ApiModelProperty(value = "The error message returned by the service provider if available. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
    public String getProviderErrorMsg() {
       return providerErrorMsg;
    }
@@ -207,7 +208,7 @@ public class ErrorDetail {
    }
 
    /**
-    * The reference returned by the service provider.
+    * The reference returned by the service provider if available.
     */
    public ErrorDetail providerRef(String providerRef) {
       this.providerRef = providerRef;
@@ -215,7 +216,7 @@ public class ErrorDetail {
    }
 
    @JsonProperty("providerRef")
-   @ApiModelProperty(value = "The reference returned by the service provider.")
+   @ApiModelProperty(value = "The reference returned by the service provider if available.")
    public String getProviderRef() {
       return providerRef;
    }
@@ -225,9 +226,8 @@ public class ErrorDetail {
    }
 
    /**
-    * The unique transaction identifier related to this transaction. This transaction identifier is encoded within the
-    * QR Code and is to be used to associate the scan and the payment request. This is the value returned in the tranId
-    * field of the CreateQrCodeResponse or provided in the ScanNotification.
+    * The unique transaction identifier related to this transaction if available. This is the value returned in the
+    * tranId field of the CreateQrCodeResponse or the ScanNotification.
     */
    public ErrorDetail tranId(String tranId) {
       this.tranId = tranId;
@@ -235,10 +235,7 @@ public class ErrorDetail {
    }
 
    @JsonProperty("tranId")
-   @ApiModelProperty(value = "The unique transaction identifier related to this transaction. This "
-         + "transaction identifier is encoded within the QR Code and is to be used to associate the scan and the "
-         + "payment request. This should be the same as the value returned in the tranId field of the CreateQrCodeResponse "
-         + "or provided in the ScanNotification.")
+   @ApiModelProperty(value = "The unique transaction identifier related to this transaction if available. This is the value returned in the tranId field of the CreateQrCodeResponse or the ScanNotification.")
    public String getTranId() {
       return tranId;
    }
@@ -280,18 +277,18 @@ public class ErrorDetail {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class ErrorDetail {\n");
+      sb.append("class ErrorDetail {").append(System.lineSeparator());
 
-      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
-      sb.append("    originalId: ").append(Utils.toIndentedString(originalId)).append("\n");
-      sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append("\n");
-      sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append("\n");
-      sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append("\n");
-      sb.append("    providerErrorCode: ").append(Utils.toIndentedString(providerErrorCode)).append("\n");
-      sb.append("    providerErrorMsg: ").append(Utils.toIndentedString(providerErrorMsg)).append("\n");
-      sb.append("    providerRef: ").append(Utils.toIndentedString(providerRef)).append("\n");
-      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
-      sb.append("}");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append(System.lineSeparator());
+      sb.append("    originalId: ").append(Utils.toIndentedString(originalId)).append(System.lineSeparator());
+      sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append(System.lineSeparator());
+      sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append(System.lineSeparator());
+      sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append(System.lineSeparator());
+      sb.append("    providerErrorCode: ").append(Utils.toIndentedString(providerErrorCode)).append(System.lineSeparator());
+      sb.append("    providerErrorMsg: ").append(Utils.toIndentedString(providerErrorMsg)).append(System.lineSeparator());
+      sb.append("    providerRef: ").append(Utils.toIndentedString(providerRef)).append(System.lineSeparator());
+      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append(System.lineSeparator());
+      sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }
 }

@@ -20,11 +20,11 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * A notification sent by the partner indicating that the partner received a scan of the QR code linked to the
- * transaction ID.
+ * The response to a CreateQrCodeRequest which contains the specific code assigned by the QR code provider as well as
+ * the full QR code in EMVCo format.
  **/
 
-@ApiModel(description = "A request to effect a payment with a linked QR code scan.")
+@ApiModel(description = "The response to a CreateQrCodeRequest which contains the specific code assigned by the QR code provider as well as the full QR code in EMVCo format.")
 public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdField, QrCodeField {
 
    protected String tranId = null;
@@ -79,14 +79,25 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
    }
 
    /**
-    * The transaction identifier encoded within the QR Code which was scanned.
+    * The unique transaction identifier assigned by the QR code provider to this QR code. This value is also encoded in
+    * the QR code returned in the qrCode field. The QR code provider is responsible for ensuring appropriate uniqueness
+    * of the QR code for the appropriate period of time. No specific restrictions are placed on the format of the QR
+    * code (length, characters etc.) but implementors should consider the following aspects:
+    * <ul>
+    * <li>Length - Longer QR codes require more detailed resolution on display screens and scanning devices and are also
+    * harder to scan.</li>
+    * <li>Manual Entry - While manual entry of QR codes is not explicitly supported by the QR Payments Service
+    * Interface, implementors may choose to support such fallback mechanisms if a QR code cannot be scanned. Longer and
+    * more complicated codes will be more susceptible to errors when input manually.</li>
+    * </ul>
+    * This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments to specific Partners.
     **/
    public CreateQrCodeResponse tranId(String tranId) {
       this.tranId = tranId;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The transaction identifier encoded within the QR Code which was scanned. This value must be provided in subsequent pay and reversePayment operations.")
+   @ApiModelProperty(required = true, value = "The unique transaction identifier assigned by the QR code provider to this QR code. This value is also encoded in the QR code returned in the qrCode field. The QR code provider is responsible for ensuring appropriate uniqueness of the QR code for the appropriate period of time. No specific restrictions are placed on the format of the QR code (length, characters etc.) but implementors should consider the following aspects; ***Length*** - Longer QR codes require more detailed resolution on display screens and scanning devices and are also harder to scan. ***Manual Entry*** - While manual entry of QR codes is not explicitly supported by the QR Payments Service Interface, implementors may choose to support such fallback mechanisms if a QR code cannot be scanned. Longer and more complicated codes will be more susceptible to errors when input manually. This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments to specific Partners.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -99,7 +110,6 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
 
    /**
     * The full set of data to be encoded in the graphical QR code. The data is provided as an EMVCo compliant string.
-    * This value must be provided in subsequent pay and reversePayment operations.
     **/
    public CreateQrCodeResponse qrCode(String qrCode) {
       this.qrCode = qrCode;
@@ -126,45 +136,24 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
       if (!super.equals(o))
          return false;
       CreateQrCodeResponse request = (CreateQrCodeResponse) o;
-      return Objects.equals(id, request.id) && Objects.equals(time, request.time)
-            && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)
-            && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
-            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts)
-            && Objects.equals(tranId, request.tranId) && Objects.equals(qrCode, request.qrCode);
+      return Objects.equals(tranId, request.tranId) && Objects.equals(qrCode, request.qrCode);
    }
 
    @Override
    public int hashCode() {
       return Objects.hash(
             super.hashCode(),
-            id,
-            time,
-            originator,
-            client,
-            thirdPartyIdentifiers,
-            rrn,
-            stan,
-            amounts,
             tranId,
             qrCode);
    }
 
    @Override
    public String toString() {
-      StringBuilder sb = new StringBuilder();
-      sb.append("class CreateQrCodeResponse {\n");
-
-      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
-      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
-      sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append("\n");
-      sb.append("    stan: ").append(Utils.toIndentedString(stan)).append("\n");
-      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
-      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
-      sb.append("    qrCode: ").append(Utils.toIndentedString(qrCode)).append("\n");
-      sb.append("}");
+      StringBuilder sb = new StringBuilder("class CreateQrCodeResponse{}").append(System.lineSeparator());
+      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append(System.lineSeparator());
+      sb.append("    qrCode: ").append(Utils.toIndentedString(qrCode)).append(System.lineSeparator());
+      sb.append("}").append(System.lineSeparator());
+      sb.append(super.toString());
       return sb.toString();
    }
 }

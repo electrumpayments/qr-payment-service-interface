@@ -1,11 +1,9 @@
 package io.electrum.qr.api.model;
 
 import java.util.List;
-import java.util.Objects;
 
 import org.joda.time.DateTime;
 
-import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
@@ -13,11 +11,11 @@ import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.swagger.annotations.ApiModel;
 
 /**
- * A request from the merchant for a QR code to be generated and returned to the merchant to display to the customer for
- * the customer to scan.
+ * A request from the merchant for a QR code to be generated. The QR code returned should be suitable to be displayed to
+ * a consumer to be scanned.
  **/
 
-@ApiModel(description = "A request to effect a payment with a linked QR code scan.")
+@ApiModel(description = "A request from the merchant for a QR code to be generated. The QR code returned should be suitable to be displayed to a consumer to be scanned.")
 public class CreateQrCodeRequest extends CreateQrCodeMessage {
 
    @Override
@@ -69,39 +67,9 @@ public class CreateQrCodeRequest extends CreateQrCodeMessage {
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o)
-         return true;
-      if (o == null || getClass() != o.getClass())
-         return false;
-      if (!super.equals(o))
-         return false;
-      CreateQrCodeRequest request = (CreateQrCodeRequest) o;
-      return Objects.equals(id, request.id) && Objects.equals(time, request.time)
-            && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)
-            && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
-            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts);
-   }
-
-   @Override
-   public int hashCode() {
-      return Objects.hash(super.hashCode(), id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts);
-   }
-
-   @Override
    public String toString() {
-      StringBuilder sb = new StringBuilder();
-      sb.append("class CreateQrCodeRequest {\n");
-
-      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
-      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
-      sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append("\n");
-      sb.append("    stan: ").append(Utils.toIndentedString(stan)).append("\n");
-      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
-      sb.append("}");
+      StringBuilder sb =
+            new StringBuilder("class CreateQrCodeRequest {}").append(System.lineSeparator()).append(super.toString());
       return sb.toString();
    }
 }

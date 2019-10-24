@@ -20,10 +20,10 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * A request from the merchant for a QR code to be generated and returned to the merchant to display to the customer for the customer to scan.
+ * A base entity describing the request for a QR code.
  **/
 
-@ApiModel(description = "A request to effect a payment with a linked QR code scan.")
+@ApiModel(description = "A base entity describing the request for a QR code.")
 public class CreateQrCodeMessage {
 
    protected String id = null;
@@ -36,7 +36,7 @@ public class CreateQrCodeMessage {
    protected Amounts amounts = null;
 
    /**
-    * The randomly generated UUID identifying this notification. THis may be a variant 3 or 4 as defined in [RFC
+    * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
     **/
    public CreateQrCodeMessage id(String id) {
@@ -44,7 +44,7 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this notification. THis may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
+   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
    public String getId() {
@@ -105,7 +105,7 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the sender of the CreateQrCodeRequest.")
+   @ApiModelProperty(required = true, value = "Data relating to the sender of the request.")
    @JsonProperty("client")
    @Valid
    @NotNull
@@ -214,17 +214,17 @@ public class CreateQrCodeMessage {
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class CreateQrCodeRequest {\n");
+      sb.append("class CreateQrCodeMessage {\n");
 
-      sb.append("    id: ").append(Utils.toIndentedString(id)).append("\n");
-      sb.append("    time: ").append(Utils.toIndentedString(time)).append("\n");
-      sb.append("    originator: ").append(Utils.toIndentedString(originator)).append("\n");
-      sb.append("    client: ").append(Utils.toIndentedString(client)).append("\n");
-      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append("\n");
-      sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append("\n");
-      sb.append("    stan: ").append(Utils.toIndentedString(stan)).append("\n");
-      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
-      sb.append("}");
+      sb.append("    id: ").append(Utils.toIndentedString(id)).append(System.lineSeparator());
+      sb.append("    time: ").append(Utils.toIndentedString(time)).append(System.lineSeparator());
+      sb.append("    originator: ").append(Utils.toIndentedString(originator)).append(System.lineSeparator());
+      sb.append("    client: ").append(Utils.toIndentedString(client)).append(System.lineSeparator());
+      sb.append("    thirdPartyIdentifiers: ").append(Utils.toIndentedString(thirdPartyIdentifiers)).append(System.lineSeparator());
+      sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append(System.lineSeparator());
+      sb.append("    stan: ").append(Utils.toIndentedString(stan)).append(System.lineSeparator());
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
+      sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }
 }
