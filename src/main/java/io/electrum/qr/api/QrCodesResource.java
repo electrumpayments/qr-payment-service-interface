@@ -46,7 +46,9 @@ public abstract class QrCodesResource {
    @Path(CreateQrCode.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(nickname = CreateQrCode.CREATE_QR_CODE, value = "Requests a QR Code to display to a customer to be scanned.", notes = "The customer may scan this code with a Partner's application and thereby allow the Partner to identify the QR code provider.")
+   @ApiOperation(nickname = CreateQrCode.CREATE_QR_CODE, value = "Requests a QR Code to display to a customer to be scanned.",
+   notes = "The customer may scan this code with a Partner's application and thereby allow the Partner to identify the QR code "
+         + "provider.")
    @ApiResponses(value = {
          @ApiResponse(code = CreateQrCode.SUCCESS, message = "Created", response = CreateQrCodeResponse.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
@@ -54,7 +56,11 @@ public abstract class QrCodesResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createQrCode(
-         @ApiParam(value = "Information pertaining to the QR code which may be available at the time of the request. This may include details such as the entity requesting the QR code, the value of the transaction for which the QR code will be used and the specific purpose of the QR code. This information should pertain to the merchant offering the QR code to the consumer (e.g. POS information) and is not intended to convey consumer information (such as loyalty information).", required = true) @NotNull @Valid CreateQrCodeRequest body,
+         @ApiParam(value = "Information pertaining to the QR code which may be available at the time of the request. "
+               + "This may include details such as the entity requesting the QR code, the value of the transaction for "
+               + "which the QR code will be used and the specific purpose of the QR code. The request for a QR code "
+               + "should convey information about the merchant requesting the QR code (e.g. POS information) and not "
+               + "information about the consumer who will scan the QR code (e.g. customer or loyalty information).", required = true) @NotNull @Valid CreateQrCodeRequest body,
          @Context SecurityContext securityContext,
          @Context Request request,
          @Suspended AsyncResponse asyncResponse,

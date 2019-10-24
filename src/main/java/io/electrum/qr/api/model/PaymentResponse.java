@@ -40,7 +40,8 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who processed the PaymentRequest. This identifies the entity who provided the ScanNotification for the QR code associated with this payment.")
+   @ApiModelProperty(required = true, value = "Data relating to the entity who processed the PaymentRequest. This identifies "
+         + "the entity who provided the ScanNotification for the QR code associated with this payment.")
    @JsonProperty("partner")
    @Valid
    @NotNull

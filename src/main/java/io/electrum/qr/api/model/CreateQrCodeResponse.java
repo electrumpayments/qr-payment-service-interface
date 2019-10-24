@@ -24,7 +24,8 @@ import io.swagger.annotations.ApiModelProperty;
  * the full QR code in EMVCo format.
  **/
 
-@ApiModel(description = "The response to a CreateQrCodeRequest which contains the specific code assigned by the QR code provider as well as the full QR code in EMVCo format.")
+@ApiModel(description = "The response to a CreateQrCodeRequest which contains the specific code assigned by the QR "
+      + "code provider as well as the full QR code in EMVCo format.")
 public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdField, QrCodeField {
 
    protected String tranId = null;
@@ -97,7 +98,16 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The unique transaction identifier assigned by the QR code provider to this QR code. This value is also encoded in the QR code returned in the qrCode field. The QR code provider is responsible for ensuring appropriate uniqueness of the QR code for the appropriate period of time. No specific restrictions are placed on the format of the QR code (length, characters etc.) but implementors should consider the following aspects; ***Length*** - Longer QR codes require more detailed resolution on display screens and scanning devices and are also harder to scan. ***Manual Entry*** - While manual entry of QR codes is not explicitly supported by the QR Payments Service Interface, implementors may choose to support such fallback mechanisms if a QR code cannot be scanned. Longer and more complicated codes will be more susceptible to errors when input manually. This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments to specific Partners.")
+   @ApiModelProperty(required = true, value = "The unique transaction identifier assigned by the QR code provider to this "
+         + "QR code. This value is also encoded in the QR code returned in the qrCode field. The QR code provider is "
+         + "responsible for ensuring appropriate uniqueness of the QR code for the appropriate period of time. No specific "
+         + "restrictions are placed on the format of the QR code (length, characters etc.) but implementors should consider "
+         + "the following aspects; ***Length*** - Longer QR codes require more detailed resolution on display screens and "
+         + "scanning devices and are also harder to scan. ***Manual Entry*** - While manual entry of QR codes is not "
+         + "explicitly supported by the QR Payments Service Interface, implementors may choose to support such fallback "
+         + "mechanisms if a QR code cannot be scanned. Longer and more complicated codes will be more susceptible to errors "
+         + "when input manually. This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments "
+         + "to specific Partners.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -109,14 +119,20 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
    }
 
    /**
-    * The full set of data to be encoded in the graphical QR code. The data is provided as an EMVCo compliant string.
+    * The full set of data to be encoded in the graphical QR code. The data is provided in a Tag-Length-Value format as
+    * described in the EMVCo specification but is not a fully EMVCo compliant string e.g. Tags which are mandatory under
+    * the EMVCo specification may be omitted. The precise set of Tags to be populated in the QR code should be discussed
+    * and agreed by implementation partners.
     **/
    public CreateQrCodeResponse qrCode(String qrCode) {
       this.qrCode = qrCode;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The full set of data to be encoded in the graphical QR code. The data is provided as an EMVCo compliant string.")
+   @ApiModelProperty(required = true, value = "The full set of data to be encoded in the graphical QR code. The data is "
+         + "provided in a Tag-Length-Value format as described in the EMVCo specification but is not a fully EMVCo "
+         + "compliant string e.g. Tags which are mandatory under the EMVCo specification may be omitted. The precise set "
+         + "of Tags to be populated in the QR code should be discussed and agreed by implementation partners.")
    @JsonProperty("qrCode")
    @NotNull
    public String getQrCode() {
@@ -141,10 +157,7 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
 
    @Override
    public int hashCode() {
-      return Objects.hash(
-            super.hashCode(),
-            tranId,
-            qrCode);
+      return Objects.hash(super.hashCode(), tranId, qrCode);
    }
 
    @Override

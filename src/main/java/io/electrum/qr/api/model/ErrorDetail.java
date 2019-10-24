@@ -117,7 +117,8 @@ public class ErrorDetail {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The type of error that occurred. This value should be used for programmatic handling of errors.")
+   @ApiModelProperty(required = true, value = "The type of error that occurred. This value should be used for programmatic "
+         + "handling of errors.")
    @JsonProperty("errorType")
    @NotNull
    public ErrorType getErrorType() {
@@ -136,7 +137,8 @@ public class ErrorDetail {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "A short description of the error. This value should be suitable for display to an operator.")
+   @ApiModelProperty(required = true, value = "A short description of the error. This value should be suitable for display "
+         + "to an operator.")
    @JsonProperty("errorMessage")
    @NotNull
    @Length(max = 40)
@@ -157,7 +159,8 @@ public class ErrorDetail {
       return this;
    }
 
-   @ApiModelProperty(value = "A free form detailed description of a particular failure condition may optionally be supplied. This information is intended for informational purposes only when investigating the cause of a failure.")
+   @ApiModelProperty(value = "A free form detailed description of a particular failure condition may optionally be supplied. "
+         + "This information is intended for informational purposes only when investigating the cause of a failure.")
    @JsonProperty("detailMessage")
    public Object getDetailMessage() {
       return detailMessage;
@@ -178,7 +181,9 @@ public class ErrorDetail {
    }
 
    @JsonProperty("providerErrorCode")
-   @ApiModelProperty(value = "The error code returned by the service provider if available. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
+   @ApiModelProperty(value = "The error code returned by the service provider if available. Note that this should be used "
+         + "for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to "
+         + "ensure a consistent set of responses.")
    public String getProviderErrorCode() {
       return providerErrorCode;
    }
@@ -198,7 +203,9 @@ public class ErrorDetail {
    }
 
    @JsonProperty("providerErrorMsg")
-   @ApiModelProperty(value = "The error message returned by the service provider if available. Note that this should be used for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent set of responses.")
+   @ApiModelProperty(value = "The error message returned by the service provider if available. Note that this should be used "
+         + "for informational purposes only. Messages displayed on the POS should make use of errorType and errorMessage to "
+         + "ensure a consistent set of responses.")
    public String getProviderErrorMsg() {
       return providerErrorMsg;
    }
@@ -235,7 +242,8 @@ public class ErrorDetail {
    }
 
    @JsonProperty("tranId")
-   @ApiModelProperty(value = "The unique transaction identifier related to this transaction if available. This is the value returned in the tranId field of the CreateQrCodeResponse or the ScanNotification.")
+   @ApiModelProperty(value = "The unique transaction identifier related to this transaction if available. This is the value "
+         + "returned in the tranId field of the CreateQrCodeResponse or the ScanNotification.")
    public String getTranId() {
       return tranId;
    }

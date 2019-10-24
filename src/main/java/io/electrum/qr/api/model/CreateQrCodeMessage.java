@@ -44,7 +44,8 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
+   @ApiModelProperty(required = true, value = "The randomly generated UUID identifying this request. This may be a "
+         + "variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
    public String getId() {
@@ -65,7 +66,9 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
+   @ApiModelProperty(required = true, value = "The date and time of the message as recorded by the sender. The format "
+         + "shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). "
+         + "It is recommended that the optional time-secfrac be included up to millisecond precision")
    @JsonProperty("time")
    @NotNull
    @Valid
@@ -162,7 +165,8 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across different systems.")
+   @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across "
+         + "different systems.")
    @JsonProperty("stan")
    public String getStan() {
       return stan;

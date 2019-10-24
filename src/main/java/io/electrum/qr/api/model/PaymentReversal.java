@@ -21,7 +21,10 @@ import io.swagger.annotations.ApiModelProperty;
  * transaction leading to unnecessary processing overheads.
  **/
 
-@ApiModel(description = "Reverse a previous PaymentRequest. This may be due to a cancellation at the POS or because the original PaymentRequest failed or is in an unknown state. Where possible all optional fields should be supplied to ensure smooth processing. If optional fields are not present then processing may require retrieval of the original transaction leading to unnecessary processing overheads.")
+@ApiModel(description = "Reverse a previous PaymentRequest. This may be due to a cancellation at the POS or because the "
+      + "original PaymentRequest failed or is in an unknown state. Where possible all optional fields should be supplied "
+      + "to ensure smooth processing. If optional fields are not present then processing may require retrieval of the "
+      + "original transaction leading to unnecessary processing overheads.")
 public class PaymentReversal extends BasicReversal implements PartnerField, TranIdField {
 
    protected Institution partner = null;

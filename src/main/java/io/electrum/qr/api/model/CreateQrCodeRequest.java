@@ -15,7 +15,8 @@ import io.swagger.annotations.ApiModel;
  * a consumer to be scanned.
  **/
 
-@ApiModel(description = "A request from the merchant for a QR code to be generated. The QR code returned should be suitable to be displayed to a consumer to be scanned.")
+@ApiModel(description = "A request from the merchant for a QR code to be generated. The QR code returned should be suitable "
+      + "to be displayed to a consumer to be scanned.")
 public class CreateQrCodeRequest extends CreateQrCodeMessage {
 
    @Override

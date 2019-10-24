@@ -45,7 +45,11 @@ public abstract class ScansResource {
    @Path(NotifyScan.RELATIVE_PATH)
    @Consumes({ "application/json" })
    @Produces({ "application/json" })
-   @ApiOperation(nickname = NotifyScan.NOTIFY_SCAN, value = "Notify that a QR code has been scanned.", notes = "Partners are not notified by a QR code provider when a QR code is generated. Only when a consumer scans a QR code using a Partner's application is the Partner is aware that the QR code is available. The Partner subsequently informs the provider of the QR code that their code has been scanned. The QR code provider shall then associate any other transactions pertaining to the QR code with the Partner.")
+   @ApiOperation(nickname = NotifyScan.NOTIFY_SCAN, value = "Notify that a QR code has been scanned.", notes = "Partners are not "
+         + "notified by a QR code provider when a QR code is generated. Only when a consumer scans a QR code using a Partner's "
+         + "application is the Partner is aware that the QR code is available. The Partner subsequently informs the provider of "
+         + "the QR code that their code has been scanned. The QR code provider shall then associate any other transactions "
+         + "pertaining to the QR code with the Partner.")
    @ApiResponses(value = { @ApiResponse(code = NotifyScan.SUCCESS, message = "Accepted"),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
          @ApiResponse(code = 500, message = "Internal Server Error", response = ErrorDetail.class),
