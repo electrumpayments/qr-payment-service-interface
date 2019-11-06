@@ -56,7 +56,7 @@ public abstract class QrCodesResource {
          @ApiResponse(code = 503, message = "Service Unavailable", response = ErrorDetail.class),
          @ApiResponse(code = 504, message = "Gateway Timeout", response = ErrorDetail.class) })
    public final void createQrCode(
-         @ApiParam(value = "Information pertaining to the QR code which may be available at the time of the request. "
+         @ApiParam(value = "Information pertaining to the QR code, which may be available at the time of the request. "
                + "This may include details such as the entity requesting the QR code, the value of the transaction for "
                + "which the QR code will be used and the specific purpose of the QR code. The request for a QR code "
                + "should convey information about the merchant requesting the QR code (e.g. POS information) and not "

@@ -89,7 +89,7 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
     * harder to scan.</li>
     * <li>Manual Entry - While manual entry of QR codes is not explicitly supported by the QR Payments Service
     * Interface, implementors may choose to support such fallback mechanisms if a QR code cannot be scanned. Longer and
-    * more complicated codes will be more susceptible to errors when input manually.</li>
+    * more complicated codes will be more susceptible to errors when inputted manually.</li>
     * </ul>
     * This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments to specific Partners.
     **/
@@ -106,7 +106,7 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
          + "scanning devices and are also harder to scan. ***Manual Entry*** - While manual entry of QR codes is not "
          + "explicitly supported by the QR Payments Service Interface, implementors may choose to support such fallback "
          + "mechanisms if a QR code cannot be scanned. Longer and more complicated codes will be more susceptible to errors "
-         + "when input manually. This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments "
+         + "when inputted manually. This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments "
          + "to specific Partners.")
    @JsonProperty("tranId")
    @NotNull
@@ -122,7 +122,7 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
     * The full set of data to be encoded in the graphical QR code. The data is provided in a Tag-Length-Value format as
     * described in the EMVCo specification but is not a fully EMVCo compliant string e.g. Tags which are mandatory under
     * the EMVCo specification may be omitted. The precise set of Tags to be populated in the QR code should be discussed
-    * and agreed by implementation partners.
+    * and agreed upon by implementation partners.
     **/
    public CreateQrCodeResponse qrCode(String qrCode) {
       this.qrCode = qrCode;
@@ -132,7 +132,7 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
    @ApiModelProperty(required = true, value = "The full set of data to be encoded in the graphical QR code. The data is "
          + "provided in a Tag-Length-Value format as described in the EMVCo specification but is not a fully EMVCo "
          + "compliant string e.g. Tags which are mandatory under the EMVCo specification may be omitted. The precise set "
-         + "of Tags to be populated in the QR code should be discussed and agreed by implementation partners.")
+         + "of Tags to be populated in the QR code should be discussed and agreed upon by implementation partners.")
    @JsonProperty("qrCode")
    @NotNull
    public String getQrCode() {

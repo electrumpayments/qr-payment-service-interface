@@ -18,8 +18,10 @@ Payments can subsequently be either confirmed or reversed.
 
 The Electrum QR Payment Service Interface defines operations and models for each of the above steps in the lifecycle in order to effect payments via QR codes.
 
-The Electrum QR Payment Service Interface allows a customer to seamlessly select which service provider should process a customer's request from the merchant without requiring complex customer interactions. A
+The Electrum QR Payment Service Interface allows a customer to seamlessly select which service provider should process their request from the merchant without requiring complex customer interactions. A
 
-merchant's customer facing channel (such as a point-of-sale or website) simply provides information to the customer during a transaction in the form of a QR code. A customer may then scan the QR code using a mobile application offered by a customer's chosen service provider. This in turn allows the service provider to contact the merchant for the purposes of processing the transaction request submitted by the point-of-sale system.
+merchant's customer-facing channel (such as a point-of-sale or website) simply provides information to the customer during a transaction in the form of a QR code. A customer may then scan the QR code using a mobile application offered by a customer's chosen service provider. This in turn allows the service provider to contact the merchant for the purposes of processing the transaction request submitted by the point-of-sale system.
 
 For more detail on the message flows please consult the page about message flows.
+
+**Note**: A partner's mobile application, its use by the customer and its communications with the partner's systems is entirely out of scope of the Electrum QR Payments Service Interface.

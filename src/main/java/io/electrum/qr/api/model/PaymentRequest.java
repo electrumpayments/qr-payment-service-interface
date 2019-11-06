@@ -18,14 +18,14 @@ import io.swagger.annotations.ApiModelProperty;
 
 /**
  * A request to effect a payment with a linked QR code. Such requests originate from the Merchant's system and are
- * typically directed to the Partner for processing. If the Partner for a {@link PaymentRequest} is not known the
+ * typically directed to the Partner for processing. If the Partner for a {@link PaymentRequest} is not known, then the
  * {@link PaymentRequest} may be directed to an intermediate system which receives {@link ScanNotification} messages
  * from Partners. This intermediate system is then responsible for identifying the correct Partner to which a
  * {@link PaymentRequest} should be directed.
  **/
 
 @ApiModel(description = "A request to effect a payment with a linked QR code. Such requests originate from the Merchant's "
-      + "system and are typically directed to the Partner for processing. If the Partner for a PaymentRequest is not known "
+      + "system and are typically directed to the Partner for processing. If the Partner for a PaymentRequest is not known, then "
       + "the PaymentRequest may be directed to an intermediate system which receives ScanNotification messages from Partners. "
       + "This intermediate system is then responsible for identifying the correct Partner to which a PaymentRequest should "
       + "be directed.")
@@ -84,8 +84,8 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
    }
 
    /**
-    * The unique transaction identifier related to this transaction. Retailers must set this to the same as the value
-    * returned in the tranId field of the {@link CreateQrCodeResponse} which preceded this {@link PaymentRequest}.
+    * The unique transaction identifier related to this transaction. Retailers must set this to the same value as that
+    * returned in the tranId field of the {@link CreateQrCodeResponse} that preceded this {@link PaymentRequest}.
     * Partners may associate this {@link PaymentRequest} with the QR code whose {@link ScanNotification} they submitted
     * with this value.
     **/
@@ -95,8 +95,8 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
    }
 
    @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction. "
-         + "Retailers must set this to the same as the value returned in the tranId field of the CreateQrCodeResponse "
-         + "which preceded this PaymentRequest. Partners may associate this PaymentRequest with the QR code whose "
+         + "Retailers must set this to the same value as that returned in the tranId field of the CreateQrCodeResponse "
+         + "that preceded this PaymentRequest. Partners may associate this PaymentRequest with the QR code whose "
          + "ScanNotification they submitted with this value.")
    @JsonProperty("tranId")
    @NotNull

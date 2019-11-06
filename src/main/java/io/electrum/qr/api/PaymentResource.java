@@ -67,7 +67,7 @@ public abstract class PaymentResource {
    @ApiOperation(nickname = ConfirmPayment.PAYMENT_CONFIRMATION, value = "Confirms completion of tender initiated "
          + "by a payment request.", notes = "This operation confirms that a QR payment transaction has completed "
                + "successfully between the consumer and the merchant. Such a transaction may may be settled between "
-               + "the merchant and the Partner which processed the payment. Such a transction not be reversed.")
+               + "the merchant and the Partner that processed the payment. Such a transaction cannot be reversed.")
    @ApiResponses(value = {
          @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = PaymentConfirmation.class),
          @ApiResponse(code = 400, message = "Bad Request", response = ErrorDetail.class),
@@ -93,7 +93,7 @@ public abstract class PaymentResource {
    @Produces({ "application/json" })
    @ApiOperation(nickname = Pay.PAY, value = "Requests a payment to be processed via a QR Partner.", notes = "This "
          + "request contains conventional payment information (POS information, transaction amount, date etc.) as "
-         + "well as Partner information. If a merchant is unable to supply the Partner information in this request "
+         + "well as Partner information. If a merchant is unable to supply the Partner information in this request, "
          + "then the request is directed to an intermediate system which also receives notifications from Partners "
          + "of QR scans. This intermediate system will match the payment request from the merchant with the scan "
          + "notification from the Partner using the QR code information common to both messages. The payment request "

@@ -47,7 +47,7 @@ public abstract class ScansResource {
    @Produces({ "application/json" })
    @ApiOperation(nickname = NotifyScan.NOTIFY_SCAN, value = "Notify that a QR code has been scanned.", notes = "Partners are not "
          + "notified by a QR code provider when a QR code is generated. Only when a consumer scans a QR code using a Partner's "
-         + "application is the Partner is aware that the QR code is available. The Partner subsequently informs the provider of "
+         + "application is the Partner aware that the QR code is available. The Partner subsequently informs the provider of "
          + "the QR code that their code has been scanned. The QR code provider shall then associate any other transactions "
          + "pertaining to the QR code with the Partner.")
    @ApiResponses(value = { @ApiResponse(code = NotifyScan.SUCCESS, message = "Accepted"),

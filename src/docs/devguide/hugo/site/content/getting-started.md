@@ -13,7 +13,7 @@ The Electrum QR Payment Service Interface is licensed under an Apache 2.0 licens
 
 ### Java
 
-The Electrum implementation of the Electrum QR Payment Service Interface is written in Java. It is highly recommended that if you are planning a Java implementation of the Electrum QR Payment Service Interface you include the Electrum Payment QR Service Interface as a dependency in your project to save you from having to re-implement the interface. This can be done using the following Maven dependency:
+The Electrum implementation of the Electrum QR Payment Service Interface is written in Java. If you are planning a Java implementation of the Electrum QR Payment Service Interface, then it is highly recommended that you include the Electrum Payment QR Service Interface as a dependency in your project to save you from having to re-implement the interface. This can be done using the following Maven dependency:
 
 ```xml
 <dependency>

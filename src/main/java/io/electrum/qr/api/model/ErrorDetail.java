@@ -14,9 +14,9 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Describes a failed the outcome of an operation.
+ * Describes a the outcome of an operation.
  **/
-@ApiModel(description = "Describes a failed the outcome of an operation.")
+@ApiModel(description = "Describes a failed outcome of an operation.")
 public class ErrorDetail {
 
    /**
