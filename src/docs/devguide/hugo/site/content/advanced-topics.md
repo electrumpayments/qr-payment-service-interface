@@ -14,7 +14,7 @@ Below is a diagram with the transaction ID highlighted to better illustrate its 
 
 ![QR Payment Flow](/images/full_qr_flow_showing_tranid.png "QR Payment Flow Highlighting the Transaction ID.")
 
-Note that the `tranId` is distinct from a message identifier in that it links all QR messages even if the messages are sent from different parties. Whilst message IDs (discussed further in the section [Request ID Construction And Handling](#Request ID Construction And Handling) below) may be used by the sender of messages to link different messages, the `tranId` is used by different parties to ensure their separate transactions may also be linked. The `tranId` field is necessary to perform this function because different parties (such as the merchant and partner) will not know the message IDs assigned by each other.
+Note that the `tranId` is distinct from a message identifier in that it links all QR messages even if the messages are sent from different parties. Whilst message IDs (discussed further in the section [Request ID Construction And Handling](#request-id-construction-and-handling) below) may be used by the sender of messages to link different messages, the `tranId` is used by different parties to ensure their separate transactions may also be linked. The `tranId` field is necessary to perform this function because different parties (such as the merchant and partner) will not know the message IDs assigned by each other.
 
 ## QR Code Structure
 ### Organization of data
