@@ -1,6 +1,13 @@
 package io.electrum.qr.api.model;
 
+import java.util.List;
+import java.util.Objects;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.electrum.qr.api.model.helper.PartnerField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
@@ -11,13 +18,8 @@ import io.electrum.vas.model.Transaction;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.util.List;
-import java.util.Objects;
-
 /**
- * The response to a successful payment with a linked QR code scan.
+ * The response to a successfully processed {@link PaymentRequest}.
  **/
 
 @ApiModel(description = "The response to a successful payment with a linked QR code scan.")
@@ -30,15 +32,16 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    protected String partnerPaymentToken = null;
 
    /**
-    * Data relating to the entity who processed the PaymentRequest. This identifies the entity who provided the
-    * ScanNotification for the QR code associated with this payment.
+    * Data relating to the entity who processed the {@link PaymentRequest}. This identifies the entity who provided the
+    * {@link ScanNotification} for the QR code associated with this payment.
     **/
    public PaymentResponse partner(Institution partner) {
       this.partner = partner;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "Data relating to the entity who processed the PaymentRequest. This identifies the entity who provided the ScanNotification for the QR code associated with this payment.")
+   @ApiModelProperty(required = true, value = "Data relating to the entity who processed the PaymentRequest. This identifies "
+         + "the entity who provided the ScanNotification for the QR code associated with this payment.")
    @JsonProperty("partner")
    @Valid
    @NotNull
@@ -48,14 +51,6 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
 
    public void setPartner(Institution partner) {
       this.partner = partner;
-   }
-
-   /**
-    * The amounts pertaining to the transaction.
-    **/
-   public PaymentResponse amounts(Amounts amounts) {
-      this.amounts = amounts;
-      return this;
    }
 
    /**
@@ -77,6 +72,14 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
       this.tenders = tenders;
    }
 
+   /**
+    * The amounts pertaining to the transaction.
+    **/
+   public PaymentResponse amounts(Amounts amounts) {
+      this.amounts = amounts;
+      return this;
+   }
+
    @ApiModelProperty(required = true, value = "The amounts pertaining to the transaction.")
    @JsonProperty("amounts")
    @Valid
@@ -90,18 +93,14 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    }
 
    /**
-    * The unique transaction identifier related to this transaction. This transaction identifier is encoded within the
-    * QR Code and is to be used to associate the scan and the payment request. This value should be the same as the
-    * value returned in the CreateQrCodeResponse which described the associated QR code.
+    * This value is echoed from the {@link PaymentRequest}.
     **/
    public PaymentResponse tranId(String tranId) {
       this.tranId = tranId;
       return this;
    }
 
-   @ApiModelProperty(required = true, value = "The unique transaction identifier related to this transaction. This "
-         + "transaction identifier is encoded within the QR Code and is to be used to associate the scan and the "
-         + "payment request. This value should be the same as the value returned in the CreateQrCodeResponse which described the associated QR code.")
+   @ApiModelProperty(required = true, value = "This value is echoed from the PaymentRequest.")
    @JsonProperty("tranId")
    @NotNull
    public String getTranId() {
@@ -113,14 +112,14 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    }
 
    /**
-    * A payment token received from the Partner in the ScanNotification.
+    * This value is echoed from the {@link PaymentRequest}.
     **/
    public PaymentResponse partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;
       return this;
    }
 
-   @ApiModelProperty(required = false, value = "A payment token received from the Partner in the ScanNotification.")
+   @ApiModelProperty(required = false, value = "This value is echoed from the PaymentRequest.")
    @JsonProperty("partnerPaymentToken")
    public String getPartnerPaymentToken() {
       return partnerPaymentToken;
@@ -152,13 +151,13 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    @Override
    public String toString() {
       StringBuilder sb = new StringBuilder();
-      sb.append("class PaymentResponse {\n");
-      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append("\n");
-      sb.append("    tenders: ").append(Utils.toIndentedString(tenders)).append("\n");
-      sb.append("    partner: ").append(Utils.toIndentedString(partner)).append("\n");
-      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append("\n");
-      sb.append("    qrCode: ").append(Utils.toIndentedString(partnerPaymentToken)).append("\n");
-      sb.append("}");
+      sb.append("class PaymentResponse {").append(System.lineSeparator());
+      sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
+      sb.append("    tenders: ").append(Utils.toIndentedString(tenders)).append(System.lineSeparator());
+      sb.append("    partner: ").append(Utils.toIndentedString(partner)).append(System.lineSeparator());
+      sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append(System.lineSeparator());
+      sb.append("    qrCode: ").append(Utils.toIndentedString(partnerPaymentToken)).append(System.lineSeparator());
+      sb.append("}").append(System.lineSeparator());
       sb.append(super.toString());
       return sb.toString();
    }
