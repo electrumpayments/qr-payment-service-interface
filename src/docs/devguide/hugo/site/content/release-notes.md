@@ -1,7 +1,7 @@
 This page describes changes to the QR Payment Service Interface implemented across different releases of the interface.
 
 ## v1.1.0
-Unreleased
+Released 18 November 2019
 
 * All documentation was reviewed and updated for correctness.
 * `equals`, `toString` and `hashcode` methods where altered to refer to `super` methods rather than directly re-using inherited fields.
