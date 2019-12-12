@@ -157,6 +157,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <source>8</source>
+          <failOnError>false</failOnError>
+        </configuration>
         <executions>
           <execution>
             <id>attach-javadocs</id>
@@ -272,8 +277,7 @@
                 <contextUrl>${artifactory-url}/</contextUrl>
                 <username>${artifactory-username}</username>
                 <password>${artifactory-password}</password>
-                <repoKey>libs-release-local</repoKey>
-                <snapshotRepoKey>libs-snapshot-local</snapshotRepoKey>
+                <repoKey>oss-local</repoKey>
               </publisher>
             </configuration>
           </execution>
