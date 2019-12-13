@@ -1,8 +1,10 @@
-package io.electrum.qr;
+package io.electrum.qr.api;
 
 import java.io.IOException;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import io.electrum.qr.api.model.CreateQrCodeRequest;
@@ -10,8 +12,16 @@ import io.electrum.qr.api.model.CreateQrCodeResponse;
 import io.electrum.qr.api.model.ScanNotification;
 import io.electrum.vas.JsonUtil;
 
-public class ModelTests {
-   
+public class ModelsTest {
+
+   @BeforeClass
+   public void beforeClass() {
+   }
+
+   @BeforeMethod
+   public void beforeMethod() {
+   }
+
    @Test
    public void testCreateQrCodeRequestHashcode() throws IOException {
       CreateQrCodeRequest createQrCodeReq1 = JsonUtil.deserialize("{}", CreateQrCodeRequest.class);

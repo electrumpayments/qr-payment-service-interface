@@ -179,7 +179,7 @@
           <apiSources>
             <apiSource>
               <springmvc>false</springmvc>
-              <locations>io.electrum.qr.api</locations>
+              <locations>io.electrum.qr.api.api</locations>
               <schemes>https</schemes>
               <host>sandbox.electrum.io</host>
               <basePath>/qr/v${major-version}</basePath>
