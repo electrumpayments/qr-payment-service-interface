@@ -1,7 +1,7 @@
 This page describes changes to the QR Payment Service Interface implemented across different releases of the interface.
 
 ## v1.2.0
-Released 12 December 2019
+Released 10 January 2020
 
 * Updates to the Java implementation of the QR Payment Service Interface:
     * The Java implementation is now built against OpenJDK 11.
