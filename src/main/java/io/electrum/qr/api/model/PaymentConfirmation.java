@@ -1,5 +1,7 @@
 package io.electrum.qr.api.model;
 
+import java.util.Objects;
+
 import javax.validation.Valid;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -61,6 +63,23 @@ public class PaymentConfirmation extends BasicAdvice implements PartnerField, Tr
 
    public void setTranId(String tranId) {
       this.tranId = tranId;
+   }
+
+   @Override
+   public boolean equals(Object o) {
+      if (this == o)
+         return true;
+      if (o == null || getClass() != o.getClass())
+         return false;
+      if (!super.equals(o))
+         return false;
+      PaymentConfirmation request = (PaymentConfirmation) o;
+      return super.equals(o) && Objects.equals(partner, request.partner) && Objects.equals(tranId, request.tranId);
+   }
+
+   @Override
+   public int hashCode() {
+      return Objects.hash(super.hashCode(), tranId, partner);
    }
 
    @Override
