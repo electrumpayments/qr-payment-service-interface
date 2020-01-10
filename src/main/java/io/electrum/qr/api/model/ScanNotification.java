@@ -250,7 +250,6 @@ public class ScanNotification implements PartnerField, TranIdField {
    @Override
    public int hashCode() {
       return Objects.hash(
-            super.hashCode(),
             id,
             time,
             partner,

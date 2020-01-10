@@ -212,7 +212,7 @@ public class CreateQrCodeMessage {
 
    @Override
    public int hashCode() {
-      return Objects.hash(super.hashCode(), id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts);
+      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts);
    }
 
    @Override
