@@ -201,8 +201,6 @@ public class CreateQrCodeMessage {
          return true;
       if (o == null || getClass() != o.getClass())
          return false;
-      if (!super.equals(o))
-         return false;
       CreateQrCodeMessage request = (CreateQrCodeMessage) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
             && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)

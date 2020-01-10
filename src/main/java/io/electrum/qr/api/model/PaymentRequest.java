@@ -138,8 +138,6 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
          return true;
       if (o == null || getClass() != o.getClass())
          return false;
-      if (!super.equals(o))
-         return false;
       PaymentRequest request = (PaymentRequest) o;
       return Objects.equals(amounts, request.amounts) && Objects.equals(partner, request.partner)
             && Objects.equals(tranId, request.tranId)

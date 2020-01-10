@@ -236,8 +236,6 @@ public class ScanNotification implements PartnerField, TranIdField {
          return true;
       if (o == null || getClass() != o.getClass())
          return false;
-      if (!super.equals(o))
-         return false;
       ScanNotification request = (ScanNotification) o;
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
             && Objects.equals(partner, request.partner) && Objects.equals(settlementEntity, request.settlementEntity)
