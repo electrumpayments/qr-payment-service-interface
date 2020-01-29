@@ -12,7 +12,7 @@ To include the service interface into your maven project, include the below depe
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>qr-payment-service-interface</artifactId>
-    <version>1.3.0</version>
+    <version>1.3.1</version>
 </dependency>
 <dependency>
       <groupId>io.electrum</groupId>

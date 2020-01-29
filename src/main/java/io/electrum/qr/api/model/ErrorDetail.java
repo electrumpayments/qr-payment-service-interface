@@ -82,7 +82,6 @@ public class ErrorDetail {
          + " a variant 4 UUID in [RFC 4122](https://tools.ietf.org/html/rfc4122).")
    @JsonProperty("id")
    @NotNull
-   @Length(max = 20)
    public String getId() {
       return id;
    }

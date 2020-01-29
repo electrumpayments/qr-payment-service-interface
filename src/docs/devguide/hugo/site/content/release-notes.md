@@ -1,5 +1,10 @@
 This page describes changes to the QR Payment Service Interface implemented across different releases of the interface.
 
+## v1.3.1
+Released TBC January 2020
+
+* Removed the length limitation on the `id` field of the `ErrorDetail` model.
+
 ## v1.3.0
 Released 10 January 2020
 
