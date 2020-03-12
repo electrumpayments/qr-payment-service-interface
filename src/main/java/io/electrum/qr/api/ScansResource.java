@@ -36,7 +36,7 @@ public abstract class ScansResource {
    public class NotifyScan {
       public static final String NOTIFY_SCAN = "notifyScan";
       public static final int SUCCESS = 202;
-      public static final String PATH = "/";
+      public static final String PATH = "";
       public static final String RELATIVE_PATH = PATH;
       public static final String FULL_PATH = ScansResource.PATH + RELATIVE_PATH;
    }

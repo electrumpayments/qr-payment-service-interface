@@ -47,7 +47,7 @@ public abstract class PaymentResource {
    public class Pay {
       public static final String PAY = "pay";
       public static final int SUCCESS = 201;
-      public static final String PATH = "/";
+      public static final String PATH = "";
       public static final String RELATIVE_PATH = PATH;
       public static final String FULL_PATH = PaymentResource.PATH + RELATIVE_PATH;
    }
