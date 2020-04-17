@@ -66,7 +66,7 @@ public abstract class PaymentResource {
    @Produces({ "application/json" })
    @ApiOperation(nickname = ConfirmPayment.PAYMENT_CONFIRMATION, value = "Confirms completion of tender initiated "
          + "by a payment request.", notes = "This operation confirms that a QR payment transaction has completed "
-               + "successfully between the consumer and the merchant. Such a transaction may may be settled between "
+               + "successfully between the consumer and the merchant. Such a transaction may be settled between "
                + "the merchant and the Partner that processed the payment. Such a transaction cannot be reversed.")
    @ApiResponses(value = {
          @ApiResponse(code = ConfirmPayment.SUCCESS, message = "Accepted", response = PaymentConfirmation.class),
@@ -121,7 +121,7 @@ public abstract class PaymentResource {
    @Produces({ "application/json" })
    @ApiOperation(nickname = ReversePayment.REVERSE_PAYMENT, value = "Reverses a payment request that failed or timed "
          + "out", notes = "This operation indicates that the sale did not complete and the payment should be reversed if it "
-               + "took place. Once a payment is reversed it canot be confirmed and need not be settled between the merchant "
+               + "took place. Once a payment is reversed it cannot be confirmed and need not be settled between the merchant "
                + "and the QR Partner.")
    @ApiResponses(value = {
          @ApiResponse(code = ReversePayment.SUCCESS, message = "Accepted", response = PaymentReversal.class),
