@@ -5,7 +5,7 @@ type: index
 
 [Electrum Payments](http://electrum.co.za) connects businesses together to transact with each other easily and robustly.
 
-This Electrum [QR Payment Service Interface](https://github.com/electrumpayments/qr-payment-service-interface) documents the messaging interface used by Electrum to connect retailers and merchants together for performing QR code based payments.
+This Electrum [QR Payment Service Interface](https://github.com/electrumpayments/qr-payment-service-interface) documents the messaging interface used by Electrum to connect retailers and partners together for performing QR code based payments.
 
 The lifecycle of a QR code based payment can be encapsulated into four major phases - namely:
 
