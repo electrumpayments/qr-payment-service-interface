@@ -31,4 +31,3 @@
     * `jersey-media-json-jackson`
     * `hibernate-validator`
 * Added minimum requirement for `service-interface-base` v3.30.0 and up.
-    
