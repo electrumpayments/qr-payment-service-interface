@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.model.Customer;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -76,6 +77,18 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
    @Override
    public CreateQrCodeResponse amounts(Amounts amounts) {
       super.amounts(amounts);
+      return this;
+   }
+
+   @Override
+   public CreateQrCodeResponse customer(Customer customer) {
+      super.customer(customer);
+      return this;
+   }
+
+   @Override
+   public CreateQrCodeResponse qrProperties(QrProperties qrProperties) {
+      super.qrProperties(qrProperties);
       return this;
    }
 

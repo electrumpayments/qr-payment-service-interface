@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.model.Customer;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,6 +35,8 @@ public class CreateQrCodeMessage {
    protected String rrn = null;
    protected String stan = null;
    protected Amounts amounts = null;
+   protected Customer customer = null;
+   protected QrProperties qrProperties = null;
 
    /**
     * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
@@ -195,6 +198,55 @@ public class CreateQrCodeMessage {
       this.amounts = amounts;
    }
 
+   /**
+    * Information detail pertaining to the customer.
+    *
+    * @since v1.5.0
+    *
+    * @param customer instance
+    * @return CreateQrCodeMessage
+    */
+   public CreateQrCodeMessage customer(Customer customer) {
+      this.customer = customer;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "Information detail pertaining to the customer.")
+   @JsonProperty("customer")
+   @Valid
+   public Customer getCustomer() {
+      return customer;
+   }
+
+   public void setCustomer(Customer customer) {
+      this.customer = customer;
+   }
+
+   /**
+    *
+    * A collection of attributes that describe how a QR code is intended to be used for transacting.
+    *
+    * @since 1.5.0
+    *
+    * @param qrProperties instance
+    * @return this instance of CreateQrCodeMessage
+    */
+   public CreateQrCodeMessage qrProperties(QrProperties qrProperties) {
+      this.qrProperties = qrProperties;
+      return this;
+   }
+
+   @ApiModelProperty(required = false/*TODO: true or false?*/, value = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
+   @JsonProperty("qrProperties")
+   @Valid
+   public QrProperties getQrProperties() {
+      return qrProperties;
+   }
+
+   public void setQrProperties(QrProperties qrProperties) {
+      this.qrProperties = qrProperties;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -205,12 +257,13 @@ public class CreateQrCodeMessage {
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
             && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
-            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts);
+            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts)
+            && Objects.equals(customer, request.customer) && Objects.equals(qrProperties, request.qrProperties);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts);
+      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts, customer, qrProperties);
    }
 
    @Override
@@ -226,6 +279,8 @@ public class CreateQrCodeMessage {
       sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append(System.lineSeparator());
       sb.append("    stan: ").append(Utils.toIndentedString(stan)).append(System.lineSeparator());
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
+      sb.append("    customer: ").append(Utils.toIndentedString(customer)).append(System.lineSeparator());
+      sb.append("    qrProperties: ").append(Utils.toIndentedString(qrProperties)).append(System.lineSeparator());
       sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }
