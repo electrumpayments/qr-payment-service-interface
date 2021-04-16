@@ -76,6 +76,7 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
    @JsonProperty("amounts")
    @Valid
    @NotNull
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
