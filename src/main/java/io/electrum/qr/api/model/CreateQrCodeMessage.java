@@ -193,6 +193,7 @@ public class CreateQrCodeMessage implements HasAmounts {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }

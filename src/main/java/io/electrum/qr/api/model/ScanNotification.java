@@ -187,6 +187,7 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }

@@ -90,6 +90,7 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }

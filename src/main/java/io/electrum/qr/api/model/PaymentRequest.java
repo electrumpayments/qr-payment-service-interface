@@ -80,6 +80,7 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }
