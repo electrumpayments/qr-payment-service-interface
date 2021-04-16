@@ -32,7 +32,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <service-interface-base-version>3.23.0</service-interface-base-version>
+    <service-interface-base-version>3.26.0</service-interface-base-version>
     <joda-time-version>2.9.4</joda-time-version>
     <swagger-version>1.5.16</swagger-version>
     <javax-servlet-api-version>3.1.0</javax-servlet-api-version>
@@ -43,7 +43,7 @@
     <logback-version>1.0.13</logback-version>
     <testng-version>7.0.0</testng-version>
     <major-version>1</major-version>
-    <minor-version>4</minor-version>
+    <minor-version>5</minor-version>
     <patch-version>0</patch-version>
     <jacoco.skip>true</jacoco.skip> <!-- skip code coverage unless maven is run with -Djacoco.skip=false -->
     <sonar.coverage.jacoco.xmlReportPaths>

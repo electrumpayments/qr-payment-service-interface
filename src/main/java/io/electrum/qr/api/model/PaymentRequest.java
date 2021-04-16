@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.qr.api.model.helper.PartnerField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Transaction;
@@ -29,7 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
       + "the PaymentRequest may be directed to an intermediate system which receives ScanNotification messages from Partners. "
       + "This intermediate system is then responsible for identifying the correct Partner to which a PaymentRequest should "
       + "be directed.")
-public class PaymentRequest extends Transaction implements PartnerField, TranIdField {
+public class PaymentRequest extends Transaction implements PartnerField, TranIdField, HasAmounts {
 
    protected Institution partner = null;
    protected Amounts amounts = null;
@@ -75,10 +76,12 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
    @JsonProperty("amounts")
    @Valid
    @NotNull
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }
