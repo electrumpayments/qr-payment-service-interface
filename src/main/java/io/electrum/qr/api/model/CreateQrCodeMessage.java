@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.interfaces.HasAmounts;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "A base entity describing the request for a QR code.")
-public class CreateQrCodeMessage {
+public class CreateQrCodeMessage implements HasAmounts {
 
    protected String id = null;
    protected DateTime time = null;
@@ -187,6 +188,7 @@ public class CreateQrCodeMessage {
    @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code to be created.")
    @JsonProperty("amounts")
    @Valid
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
