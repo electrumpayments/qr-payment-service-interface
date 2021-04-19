@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 
+import io.electrum.qr.api.model.helper.TranIdField;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  * Describes a the outcome of an operation.
  **/
 @ApiModel(description = "Describes a failed outcome of an operation.")
-public class ErrorDetail {
+public class ErrorDetail implements TranIdField {
 
    /**
     * Every failure must be classified into one of the following failure types
@@ -244,10 +245,12 @@ public class ErrorDetail {
    @JsonProperty("tranId")
    @ApiModelProperty(value = "The unique transaction identifier related to this transaction if available. This is the value "
          + "returned in the tranId field of the CreateQrCodeResponse or the ScanNotification.")
+   @Override
    public String getTranId() {
       return tranId;
    }
 
+   @Override
    public void setTranId(String tranId) {
       this.tranId = tranId;
    }

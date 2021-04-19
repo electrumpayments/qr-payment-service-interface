@@ -16,6 +16,10 @@
 
 ## Version 1.5.0 - 16 April 2021
 ### Features
+* Updated `ErrorDetail` model to implement `TranidField` interface.
+
+## Version 1.5.0 - 16 April 2021
+### Features
 * Updated `service-interface-base` from `3.23.0` to `3.26.0`.
 * Updated the following payloads to implement the `HasAmounts` interface:
     * `CreateQrCodeMessage`
