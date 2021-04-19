@@ -14,7 +14,7 @@
     - Try and avoid special characters as far as possible
 -->
 
-## Version 1.5.0 - 19 April 2021
+## Version 1.6.0 - 19 April 2021
 ### Features
 * Updated `ErrorDetail` model to implement `TranidField` interface.
 
