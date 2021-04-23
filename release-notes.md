@@ -14,6 +14,11 @@
     - Try and avoid special characters as far as possible
 -->
 
+## Version 1.7.0 - 23 April 2021
+### Features
+* Updated `CreateQrCodeMessage` model to implement `VasMessage` interface.
+* Removed `hibernate-validation` dependency as it is already supplied by `service-interface-base`.
+
 ## Version 1.6.0 - 19 April 2021
 ### Features
 * Updated `ErrorDetail` model to implement `TranidField` interface.
