@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.qr.api.model.helper.PartnerField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Tender;
@@ -23,7 +24,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "The response to a successful payment with a linked QR code scan.")
-public class PaymentResponse extends Transaction implements PartnerField, TranIdField {
+public class PaymentResponse extends Transaction implements PartnerField, TranIdField, HasAmounts {
 
    protected Institution partner = null;
    protected List<Tender> tenders = null;
@@ -84,10 +85,12 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    @JsonProperty("amounts")
    @Valid
    @NotNull
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }
