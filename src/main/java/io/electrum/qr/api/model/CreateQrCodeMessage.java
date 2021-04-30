@@ -236,7 +236,7 @@ public class CreateQrCodeMessage {
       return this;
    }
 
-   @ApiModelProperty(required = false/*TODO: true or false?*/, value = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
+   @ApiModelProperty(required = true, value = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
    @JsonProperty("qrProperties")
    @Valid
    public QrProperties getQrProperties() {

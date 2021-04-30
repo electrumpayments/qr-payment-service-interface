@@ -1,5 +1,6 @@
 package io.electrum.qr.api.model;
 
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -31,7 +32,7 @@ public class QrProperties   {
    private Boolean partPaymentAllowed = null;
 
    @JsonProperty("expiryDate")
-   private Date expiryDate = null;
+   private OffsetDateTime expiryDate = null;
 
    @JsonProperty("singleUse")
    private Boolean singleUse = null;
@@ -148,7 +149,7 @@ public class QrProperties   {
       this.partPaymentAllowed = partPaymentAllowed;
    }
 
-   public QrProperties expiryDate(Date expiryDate) {
+   public QrProperties expiryDate(OffsetDateTime expiryDate) {
       this.expiryDate = expiryDate;
       return this;
    }
@@ -160,11 +161,11 @@ public class QrProperties   {
    @JsonProperty("expiryDate")
    @ApiModelProperty(value = "The date and time at which the QR code expires at which point it may no longer be used to facilitate transactions. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision")
    @Valid
-   public Date getExpiryDate() {
+   public OffsetDateTime getExpiryDate() {
       return expiryDate;
    }
 
-   public void setExpiryDate(Date expiryDate) {
+   public void setExpiryDate(OffsetDateTime expiryDate) {
       this.expiryDate = expiryDate;
    }
 

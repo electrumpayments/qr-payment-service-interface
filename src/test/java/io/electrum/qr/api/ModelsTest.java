@@ -2,6 +2,7 @@ package io.electrum.qr.api;
 
 import java.io.IOException;
 
+import io.electrum.qr.api.model.QrProperties;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -89,5 +90,13 @@ public class ModelsTest {
       ErrorDetail errorDetail2 = JsonUtil.deserialize("{}", ErrorDetail.class);
       Assert.assertEquals(errorDetail1.hashCode(), errorDetail2.hashCode());
       Assert.assertEquals(errorDetail1, errorDetail2);
+   }
+
+   @Test
+   public void testQrProperties() throws IOException {
+      QrProperties qrProperties1 = JsonUtil.deserialize("{}", QrProperties.class);
+      QrProperties qrProperties2 = JsonUtil.deserialize("{}", QrProperties.class);
+      Assert.assertEquals(qrProperties1.hashCode(), qrProperties2.hashCode());
+      Assert.assertEquals(qrProperties1, qrProperties2);
    }
 }

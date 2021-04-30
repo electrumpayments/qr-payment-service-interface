@@ -15,12 +15,15 @@
 -->
 
 ## Version 1.5.0 - 07 April 2021
+
 ### New Features
+
 * Added a new model object called `QrProperties`.
 * Added the following member variables to the `CreateQrCodeRequest` and `CreateQrCodeResponse` model objects:
     * `customer`
     * `qrProperties`
-* Removed the following dependencies which are brought in by `service-interface-base`:
+* The `service-interface-base` provides a lot of dependencies that it previously didn't. For this reason the following
+  dependencies were removed from this project's pom file:
     * `joda-time`
     * `swagger-jersey2-jaxrs`
     * `swagger-hibernate-validations`
