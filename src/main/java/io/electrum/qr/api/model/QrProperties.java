@@ -2,15 +2,16 @@ package io.electrum.qr.api.model;
 
 import java.time.OffsetDateTime;
 import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.Valid;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+
 import io.electrum.vas.model.LedgerAmount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-
-import java.util.Date;
-import javax.validation.Valid;
 
 /**
  * A collection of attributes that describe how a QR code is intended to be used for transacting.
@@ -18,7 +19,7 @@ import javax.validation.Valid;
  * @since 1.5.0
  */
 @ApiModel(description = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
-public class QrProperties   {
+public class QrProperties {
    @JsonProperty("uuid")
    private String uuid = null;
 
@@ -36,39 +37,6 @@ public class QrProperties   {
 
    @JsonProperty("singleUse")
    private Boolean singleUse = null;
-
-   /**
-    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60; object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:   * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format.   * PSEUDO_EMVCO_MERCHANT - A format based on the EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be absent in this scheme.   * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR code specification however it comprises the minimal set of fields to faciliate transactions.
-    */
-   public enum SchemeEnum {
-      EMVCO_MERCHANT("EMVCO_MERCHANT"),
-
-      PSEUDO_EMVCO_MERCHANT("PSEUDO_EMVCO_MERCHANT"),
-
-      ELECTRUM_MERCHANT_MINIMAL("ELECTRUM_MERCHANT_MINIMAL");
-
-      private String value;
-
-      SchemeEnum(String value) {
-         this.value = value;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
-
-      @JsonCreator
-      public static SchemeEnum fromValue(String text) {
-         for (SchemeEnum b : SchemeEnum.values()) {
-            if (String.valueOf(b.value).equals(text)) {
-               return b;
-            }
-         }
-         return null;
-      }
-   }
    @JsonProperty("scheme")
    private SchemeEnum scheme = null;
 
@@ -79,6 +47,7 @@ public class QrProperties   {
 
    /**
     * The value which, when embedded in an EMVCo QR code, identifies that Capitec is the provider of the QR code.
+    *
     * @return uuid
     **/
    @JsonProperty("uuid")
@@ -98,6 +67,7 @@ public class QrProperties   {
 
    /**
     * Get value
+    *
     * @return value
     **/
    @JsonProperty("value")
@@ -117,7 +87,9 @@ public class QrProperties   {
    }
 
    /**
-    * Indicates whether or not the transaction against the QR may use an amount greater than the value in the &#x60;amount&#x60; field.
+    * Indicates whether or not the transaction against the QR may use an amount greater than the value in the
+    * &#x60;amount&#x60; field.
+    *
     * @return overPaymentAllowed
     **/
    @JsonProperty("overPaymentAllowed")
@@ -136,7 +108,9 @@ public class QrProperties   {
    }
 
    /**
-    * Indicates whether or not the transaction against the QR may use an amount less than the value in the &#x60;amount&#x60; field.
+    * Indicates whether or not the transaction against the QR may use an amount less than the value in the
+    * &#x60;amount&#x60; field.
+    *
     * @return partPaymentAllowed
     **/
    @JsonProperty("partPaymentAllowed")
@@ -155,7 +129,11 @@ public class QrProperties   {
    }
 
    /**
-    * The date and time at which the QR code expires at which point it may no longer be used to facilitate transactions. The format shall be as defined for date-time in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be included up to millisecond precision
+    * The date and time at which the QR code expires at which point it may no longer be used to facilitate transactions.
+    * The format shall be as defined for date-time in [RFC 3339 section
+    * 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional time-secfrac be
+    * included up to millisecond precision
+    *
     * @return expiryDate
     **/
    @JsonProperty("expiryDate")
@@ -175,7 +153,9 @@ public class QrProperties   {
    }
 
    /**
-    * If set to &#x60;true&#x60;, the QR code is intended to be used for a single transaction only. *Note*: This is not a strictly enforced rule but is rather intended as a guide as to the intended use of the QR code.
+    * If set to &#x60;true&#x60;, the QR code is intended to be used for a single transaction only. *Note*: This is not
+    * a strictly enforced rule but is rather intended as a guide as to the intended use of the QR code.
+    *
     * @return singleUse
     **/
    @JsonProperty("singleUse")
@@ -194,7 +174,13 @@ public class QrProperties   {
    }
 
    /**
-    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60; object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:   * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format.   * PSEUDO_EMVCO_MERCHANT - A format based on the EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be absent in this scheme.   * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR code specification however it comprises the minimal set of fields to faciliate transactions.
+    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60;
+    * object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:
+    * * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format. * PSEUDO_EMVCO_MERCHANT - A format based on the
+    * EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be
+    * absent in this scheme. * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR
+    * code specification however it comprises the minimal set of fields to faciliate transactions.
+    *
     * @return scheme
     **/
    @JsonProperty("scheme")
@@ -207,7 +193,6 @@ public class QrProperties   {
       this.scheme = scheme;
    }
 
-
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -216,21 +201,19 @@ public class QrProperties   {
       if (o == null || getClass() != o.getClass()) {
          return false;
       }
-      QrProperties QrProperties = (QrProperties) o;
-      return Objects.equals(this.uuid, QrProperties.uuid) &&
-            Objects.equals(this.value, QrProperties.value) &&
-            Objects.equals(this.overPaymentAllowed, QrProperties.overPaymentAllowed) &&
-            Objects.equals(this.partPaymentAllowed, QrProperties.partPaymentAllowed) &&
-            Objects.equals(this.expiryDate, QrProperties.expiryDate) &&
-            Objects.equals(this.singleUse, QrProperties.singleUse) &&
-            Objects.equals(this.scheme, QrProperties.scheme);
+      QrProperties qrProperties = (QrProperties) o;
+      return Objects.equals(this.uuid, qrProperties.uuid) && Objects.equals(this.value, qrProperties.value)
+            && Objects.equals(this.overPaymentAllowed, qrProperties.overPaymentAllowed)
+            && Objects.equals(this.partPaymentAllowed, qrProperties.partPaymentAllowed)
+            && Objects.equals(this.expiryDate, qrProperties.expiryDate)
+            && Objects.equals(this.singleUse, qrProperties.singleUse)
+            && Objects.equals(this.scheme, qrProperties.scheme);
    }
 
    @Override
    public int hashCode() {
       return Objects.hash(uuid, value, overPaymentAllowed, partPaymentAllowed, expiryDate, singleUse, scheme);
    }
-
 
    @Override
    public String toString() {
@@ -249,13 +232,50 @@ public class QrProperties   {
    }
 
    /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
+    * Convert the given object to string with each line indented by 4 spaces (except the first line).
     */
    private String toIndentedString(java.lang.Object o) {
       if (o == null) {
          return "null";
       }
       return o.toString().replace("\n", "\n    ");
+   }
+
+   /**
+    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60;
+    * object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:
+    * * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format. * PSEUDO_EMVCO_MERCHANT - A format based on the
+    * EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be
+    * absent in this scheme. * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR
+    * code specification however it comprises the minimal set of fields to faciliate transactions.
+    */
+   public enum SchemeEnum {
+      EMVCO_MERCHANT("EMVCO_MERCHANT"),
+
+      PSEUDO_EMVCO_MERCHANT("PSEUDO_EMVCO_MERCHANT"),
+
+      ELECTRUM_MERCHANT_MINIMAL("ELECTRUM_MERCHANT_MINIMAL");
+
+      private String value;
+
+      SchemeEnum(String value) {
+         this.value = value;
+      }
+
+      @JsonCreator
+      public static SchemeEnum fromValue(String text) {
+         for (SchemeEnum b : SchemeEnum.values()) {
+            if (String.valueOf(b.value).equals(text)) {
+               return b;
+            }
+         }
+         return null;
+      }
+
+      @Override
+      @JsonValue
+      public String toString() {
+         return String.valueOf(value);
+      }
    }
 }
