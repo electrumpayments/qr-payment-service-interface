@@ -33,7 +33,7 @@
     * `jersey-client`
     * `jersey-media-json-jackson`
     * `hibernate-validator`
-* Added minimum requirement for `service-interface-base` v3.30.0 and up.
+* Added minimum requirement for `service-interface-base` v3.30.1 and up.
 
 ## Version 1.6.0 - 19 April 2021
 ### Features
