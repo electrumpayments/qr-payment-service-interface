@@ -7,7 +7,6 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import io.electrum.vas.model.Customer;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,6 +16,9 @@ import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
+import io.electrum.vas.model.Customer;
+import io.electrum.vas.interfaces.HasAmounts;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -25,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "A base entity describing the request for a QR code.")
-public class CreateQrCodeMessage {
+public class CreateQrCodeMessage implements HasAmounts {
 
    protected String id = null;
    protected DateTime time = null;
@@ -190,10 +192,12 @@ public class CreateQrCodeMessage {
    @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code to be created.")
    @JsonProperty("amounts")
    @Valid
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }

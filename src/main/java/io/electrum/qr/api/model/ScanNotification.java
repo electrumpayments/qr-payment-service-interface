@@ -7,6 +7,7 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
+import io.electrum.vas.interfaces.HasAmounts;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -29,7 +30,7 @@ import io.swagger.annotations.ApiModelProperty;
 @ApiModel(description = "A notification sent by the Partner indicating that the Partner received a scan of the QR code "
       + "linked to the transaction ID. Any PaymentRequest with a matching tranId value should be forwarded to the Partner "
       + "for processing.")
-public class ScanNotification implements PartnerField, TranIdField {
+public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
 
    protected String id = null;
    protected DateTime time = null;
@@ -181,10 +182,12 @@ public class ScanNotification implements PartnerField, TranIdField {
    @ApiModelProperty(required = false, value = "The amounts pertaining to the QR code which was scanned.")
    @JsonProperty("amounts")
    @Valid
+   @Override
    public Amounts getAmounts() {
       return amounts;
    }
 
+   @Override
    public void setAmounts(Amounts amounts) {
       this.amounts = amounts;
    }

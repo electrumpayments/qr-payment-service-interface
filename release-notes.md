@@ -1,4 +1,4 @@
-# Service Interface Base Release Notes
+# Qr Payments API Release Notes
 
 <!-- README:
   * Add new entries to the top of this file (under this comment), making sure to specify the correct version number and release date.
@@ -14,7 +14,7 @@
     - Try and avoid special characters as far as possible
 -->
 
-## Version 1.5.0 - 07 April 2021
+## Version 1.7.0 - 29 April 2021
 
 ### New Features
 
@@ -34,3 +34,16 @@
     * `jersey-media-json-jackson`
     * `hibernate-validator`
 * Added minimum requirement for `service-interface-base` v3.30.0 and up.
+
+## Version 1.6.0 - 19 April 2021
+### Features
+* Updated `ErrorDetail` model to implement `TranidField` interface.
+
+## Version 1.5.0 - 16 April 2021
+### Features
+* Updated `service-interface-base` from `3.23.0` to `3.26.0`.
+* Updated the following payloads to implement the `HasAmounts` interface:
+    * `CreateQrCodeMessage`
+    * `PaymentRequest`
+    * `PaymentResponse`
+    * `ScanNotification`
