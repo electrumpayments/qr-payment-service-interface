@@ -108,6 +108,7 @@
         <configuration>
           <source>8</source>
           <failOnError>false</failOnError>
+          <detectJavaApiLink>false</detectJavaApiLink> <!-- Issue was similar to this: https://stackoverflow.com/questions/58836862/jdk-11-and-javadoc -->
         </configuration>
         <executions>
           <execution>
