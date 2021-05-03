@@ -18,6 +18,8 @@ import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
+import io.electrum.vas.interfaces.HasAmounts;
+import io.electrum.vas.model.VasMessage;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -26,7 +28,7 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 
 @ApiModel(description = "A base entity describing the request for a QR code.")
-public class CreateQrCodeMessage implements HasAmounts {
+public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    protected String id = null;
    protected DateTime time = null;
@@ -56,10 +58,12 @@ public class CreateQrCodeMessage implements HasAmounts {
          + "variant 3 or 4 as defined in [RFC 4122](https://tools.ietf.org/html/rfc4122)")
    @JsonProperty("id")
    @NotNull
+   @Override
    public String getId() {
       return id;
    }
 
+   @Override
    public void setId(String id) {
       this.id = id;
    }
@@ -84,10 +88,12 @@ public class CreateQrCodeMessage implements HasAmounts {
    @JsonProperty("time")
    @NotNull
    @Valid
+   @Override
    public DateTime getTime() {
       return time;
    }
 
+   @Override
    public void setTime(DateTime time) {
       this.time = time;
    }
@@ -153,10 +159,12 @@ public class CreateQrCodeMessage implements HasAmounts {
    @ApiModelProperty(value = "An array of identifiers which each identify the transaction within each entity's system.")
    @JsonProperty("thirdPartyIdentifiers")
    @Valid
+   @Override
    public List<ThirdPartyIdentifier> getThirdPartyIdentifiers() {
       return thirdPartyIdentifiers;
    }
 
+   @Override
    public void setThirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
    }
@@ -175,10 +183,12 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    @ApiModelProperty(required = false, value = "This is a reference set by the original source of the request.")
    @JsonProperty("rrn")
+   @Override
    public String getRrn() {
       return rrn;
    }
 
+   @Override
    public void setRrn(String rrn) {
       this.rrn = rrn;
    }
@@ -198,10 +208,12 @@ public class CreateQrCodeMessage implements HasAmounts {
    @ApiModelProperty(required = false, value = "The System Trace Audit Number can be used to locate transactions across "
          + "different systems.")
    @JsonProperty("stan")
+   @Override
    public String getStan() {
       return stan;
    }
 
+   @Override
    public void setStan(String stan) {
       this.stan = stan;
    }
