@@ -14,10 +14,12 @@
     - Try and avoid special characters as far as possible
 -->
 
-## Version 1.7.0 - 29 April 2021
+## Version 1.7.0 - 3 May 2021
 
 ### New Features
 
+* Updated `CreateQrCodeMessage` model to implement `VasMessage` interface.
+* Removed `hibernate-validation` dependency as it is already supplied by `service-interface-base`.
 * Added a new model object called `QrProperties`.
 * Added the following member variables to the `CreateQrCodeRequest` and `CreateQrCodeResponse` model objects:
     * `customer`
