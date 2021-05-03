@@ -4,12 +4,12 @@ import java.util.Objects;
 
 import javax.validation.constraints.NotNull;
 
-import io.electrum.qr.api.model.helper.TranIdField;
 import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -19,46 +19,6 @@ import io.swagger.annotations.ApiModelProperty;
  **/
 @ApiModel(description = "Describes a failed outcome of an operation.")
 public class ErrorDetail implements TranIdField {
-
-   /**
-    * Every failure must be classified into one of the following failure types
-    */
-   public enum ErrorType {
-      DUPLICATE_RECORD("DUPLICATE_RECORD"),
-      FORMAT_ERROR("FORMAT_ERROR"),
-      FUNCTION_NOT_SUPPORTED("FUNCTION_NOT_SUPPORTED"),
-      GENERAL_ERROR("GENERAL_ERROR"),
-      INVALID_AMOUNT("INVALID_AMOUNT"),
-      ROUTING_ERROR("ROUTING_ERROR"),
-      TRANSACTION_NOT_SUPPORTED("TRANSACTION_NOT_SUPPORTED"),
-      UNABLE_TO_LOCATE_RECORD("UNABLE_TO_LOCATE_RECORD"),
-      UPSTREAM_UNAVAILABLE("UPSTREAM_UNAVAILABLE"),
-      ACCOUNT_ALREADY_SETTLED("ACCOUNT_ALREADY_SETTLED"),
-      INVALID_MERCHANT("INVALID_MERCHANT"),
-      DO_NOT_HONOR("DO_NOT_HONOR"),
-      DECLINED_BY_PARTNER("DECLINED_BY_PARTNER"),
-      DECLINED_BY_ACQUIRER("DECLINED_BY_ACQUIRER"),
-      DECLINED_BY_ISSUER("DECLINED_BY_ISSUER"),
-      INSUFFICIENT_FUNDS("INSUFFICIENT_FUNDS"),
-      INVALID_CARD_NUMBER("INVALID_CARD_NUMBER"),
-      CARD_EXPIRED("CARD_EXPIRED"),
-      INVALID_TRAN_ID("INVALID_TRAN_ID"),
-      PARTNER_UNKNOWN("PARTNER_UNKNOWN"),
-      NO_SCAN_RECEIVED("NO_SCAN_RECEIVED"),
-      INVALID_ACCOUNT("INVALID_ACCOUNT");
-
-      private String value;
-
-      ErrorType(String value) {
-         this.value = value;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
-   }
 
    private String id;
    private String originalId;
@@ -73,6 +33,10 @@ public class ErrorDetail implements TranIdField {
    /**
     * The randomly generated UUID identifying this errorDetail, as defined for a variant 4 UUID in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122).
+    *
+    * @param id
+    *           The payload's unique id as a UUID string.
+    * @return this object.
     */
    public ErrorDetail id(String id) {
       this.id = id;
@@ -94,6 +58,10 @@ public class ErrorDetail implements TranIdField {
 
    /**
     * The UUID of the original request message in the case of an error occurring for an advice message.
+    *
+    * @param originalId
+    *           The original request's payload id.
+    * @return this object.
     */
    public ErrorDetail originalId(String originalId) {
       this.originalId = originalId;
@@ -112,6 +80,10 @@ public class ErrorDetail implements TranIdField {
 
    /**
     * The type of error that occurred. This value should be used for programmatic handling of errors.
+    *
+    * @param errorType
+    *           The error type returned in the response.
+    * @return this object.
     **/
    public ErrorDetail errorType(ErrorType errorType) {
       this.errorType = errorType;
@@ -132,6 +104,10 @@ public class ErrorDetail implements TranIdField {
 
    /**
     * A short description of the error. This value should be suitable for display to an operator.
+    *
+    * @param errorMessage
+    *           The error message describing the error.
+    * @return this object.
     **/
    public ErrorDetail errorMessage(String errorMessage) {
       this.errorMessage = errorMessage;
@@ -154,6 +130,10 @@ public class ErrorDetail implements TranIdField {
    /**
     * A free form detailed description of a particular failure condition may optionally be supplied. This information is
     * intended for informational purposes only when investigating the cause of a failure.
+    *
+    * @param detailMessage
+    *           A detailed message about the error.
+    * @return this object.
     **/
    public ErrorDetail detailMessage(Object detailMessage) {
       this.detailMessage = detailMessage;
@@ -175,6 +155,10 @@ public class ErrorDetail implements TranIdField {
     * The error code returned by the service provider if available. Note that this should be used for informational
     * purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent
     * set of responses.
+    *
+    * @param providerErrorCode
+    *           The error code supplied to us from up stream.
+    * @return this object.
     **/
    public ErrorDetail providerErrorCode(String providerErrorCode) {
       this.providerErrorCode = providerErrorCode;
@@ -197,6 +181,10 @@ public class ErrorDetail implements TranIdField {
     * The error message returned by the service provider if available. Note that this should be used for informational
     * purposes only. Messages displayed on the POS should make use of errorType and errorMessage to ensure a consistent
     * set of responses.
+    *
+    * @param providerErrorMsg
+    *           The error message supplied to us from up stream.
+    * @return this object.
     */
    public ErrorDetail providerErrorMsg(String providerErrorMsg) {
       this.providerErrorMsg = providerErrorMsg;
@@ -217,6 +205,10 @@ public class ErrorDetail implements TranIdField {
 
    /**
     * The reference returned by the service provider if available.
+    *
+    * @param providerRef
+    *           A reference supplied to us from an upstream provider.
+    * @return this object.
     */
    public ErrorDetail providerRef(String providerRef) {
       this.providerRef = providerRef;
@@ -236,6 +228,10 @@ public class ErrorDetail implements TranIdField {
    /**
     * The unique transaction identifier related to this transaction if available. This is the value returned in the
     * tranId field of the CreateQrCodeResponse or the ScanNotification.
+    *
+    * @param tranId
+    *           The transaction identifier
+    * @return this object.
     */
    public ErrorDetail tranId(String tranId) {
       this.tranId = tranId;
@@ -295,11 +291,55 @@ public class ErrorDetail implements TranIdField {
       sb.append("    errorType: ").append(Utils.toIndentedString(errorType)).append(System.lineSeparator());
       sb.append("    responseMessage: ").append(Utils.toIndentedString(errorMessage)).append(System.lineSeparator());
       sb.append("    detailMessage: ").append(Utils.toIndentedString(detailMessage)).append(System.lineSeparator());
-      sb.append("    providerErrorCode: ").append(Utils.toIndentedString(providerErrorCode)).append(System.lineSeparator());
-      sb.append("    providerErrorMsg: ").append(Utils.toIndentedString(providerErrorMsg)).append(System.lineSeparator());
+      sb.append("    providerErrorCode: ")
+            .append(Utils.toIndentedString(providerErrorCode))
+            .append(System.lineSeparator());
+      sb.append("    providerErrorMsg: ")
+            .append(Utils.toIndentedString(providerErrorMsg))
+            .append(System.lineSeparator());
       sb.append("    providerRef: ").append(Utils.toIndentedString(providerRef)).append(System.lineSeparator());
       sb.append("    tranId: ").append(Utils.toIndentedString(tranId)).append(System.lineSeparator());
       sb.append("}").append(System.lineSeparator());
       return sb.toString();
+   }
+
+   /**
+    * Every failure must be classified into one of the following failure types
+    */
+   public enum ErrorType {
+      DUPLICATE_RECORD("DUPLICATE_RECORD"),
+      FORMAT_ERROR("FORMAT_ERROR"),
+      FUNCTION_NOT_SUPPORTED("FUNCTION_NOT_SUPPORTED"),
+      GENERAL_ERROR("GENERAL_ERROR"),
+      INVALID_AMOUNT("INVALID_AMOUNT"),
+      ROUTING_ERROR("ROUTING_ERROR"),
+      TRANSACTION_NOT_SUPPORTED("TRANSACTION_NOT_SUPPORTED"),
+      UNABLE_TO_LOCATE_RECORD("UNABLE_TO_LOCATE_RECORD"),
+      UPSTREAM_UNAVAILABLE("UPSTREAM_UNAVAILABLE"),
+      ACCOUNT_ALREADY_SETTLED("ACCOUNT_ALREADY_SETTLED"),
+      INVALID_MERCHANT("INVALID_MERCHANT"),
+      DO_NOT_HONOR("DO_NOT_HONOR"),
+      DECLINED_BY_PARTNER("DECLINED_BY_PARTNER"),
+      DECLINED_BY_ACQUIRER("DECLINED_BY_ACQUIRER"),
+      DECLINED_BY_ISSUER("DECLINED_BY_ISSUER"),
+      INSUFFICIENT_FUNDS("INSUFFICIENT_FUNDS"),
+      INVALID_CARD_NUMBER("INVALID_CARD_NUMBER"),
+      CARD_EXPIRED("CARD_EXPIRED"),
+      INVALID_TRAN_ID("INVALID_TRAN_ID"),
+      PARTNER_UNKNOWN("PARTNER_UNKNOWN"),
+      NO_SCAN_RECEIVED("NO_SCAN_RECEIVED"),
+      INVALID_ACCOUNT("INVALID_ACCOUNT");
+
+      private String value;
+
+      ErrorType(String value) {
+         this.value = value;
+      }
+
+      @Override
+      @JsonValue
+      public String toString() {
+         return String.valueOf(value);
+      }
    }
 }

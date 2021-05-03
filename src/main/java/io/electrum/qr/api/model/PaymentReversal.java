@@ -32,6 +32,10 @@ public class PaymentReversal extends BasicReversal implements PartnerField, Tran
 
    /**
     * An echo of the value in the original {@link PaymentRequest}.
+    *
+    * @param partner
+    *           The payment partner's institution ID.
+    * @return this object.
     **/
    public PaymentReversal partner(Institution partner) {
       this.partner = partner;
@@ -51,6 +55,10 @@ public class PaymentReversal extends BasicReversal implements PartnerField, Tran
 
    /**
     * An echo of the value in the original {@link PaymentRequest}.
+    *
+    * @param tranId
+    *           The transaction identifier.
+    * @return this object.
     **/
    public PaymentReversal tranId(String tranId) {
       this.tranId = tranId;

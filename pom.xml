@@ -108,7 +108,6 @@
         <configuration>
           <source>8</source>
           <failOnError>false</failOnError>
-          <detectJavaApiLink>false</detectJavaApiLink>
         </configuration>
         <executions>
           <execution>

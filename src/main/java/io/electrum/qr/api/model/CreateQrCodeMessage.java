@@ -12,13 +12,12 @@ import org.joda.time.DateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
-import io.electrum.vas.model.Customer;
-import io.electrum.vas.interfaces.HasAmounts;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -43,6 +42,10 @@ public class CreateQrCodeMessage implements HasAmounts {
    /**
     * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
+    *
+    * @param id
+    *           A UUID string representing the ID of this transaction.
+    * @return this object.
     **/
    public CreateQrCodeMessage id(String id) {
       this.id = id;
@@ -65,6 +68,10 @@ public class CreateQrCodeMessage implements HasAmounts {
     * The date and time of the message in UTC, as recorded by the sender. The format shall be as defined for date-time
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
+    * 
+    * @param time
+    *           The date and time that this request was generated.
+    * @return this object.
     **/
    public CreateQrCodeMessage time(DateTime time) {
       this.time = time;
@@ -87,6 +94,10 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * Data relating to the originator of the request.
+    *
+    * @param originator
+    *           The originator object describing where this payload originated from.
+    * @return this object.
     **/
    public CreateQrCodeMessage originator(Originator originator) {
       this.originator = originator;
@@ -107,6 +118,10 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * Data relating to the sender of the CreateQrCodeRequest.
+    * 
+    * @param client
+    *           The institution information pertaining to the client that sent this request to Electrum.
+    * @return this object.
     **/
    public CreateQrCodeMessage client(Institution client) {
       this.client = client;
@@ -127,6 +142,8 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * An array of identifiers which identify the transaction within each entity's system.
+    * @param transactionIdentifiers A list of transaction identifiers.
+    * @return this object.
     **/
    public CreateQrCodeMessage thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
@@ -146,6 +163,10 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * This is a reference set by the original source of the request.
+    * 
+    * @param rrn
+    *           The retrieval reference number correlating to this transaction.
+    * @return this object.
     **/
    public CreateQrCodeMessage rrn(String rrn) {
       this.rrn = rrn;
@@ -164,6 +185,10 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * The System Trace Audit Number can be used to locate transactions across different systems.
+    * 
+    * @param stan
+    *           The system trace audit number.
+    * @return this object.
     **/
    public CreateQrCodeMessage stan(String stan) {
       this.stan = stan;
@@ -183,6 +208,10 @@ public class CreateQrCodeMessage implements HasAmounts {
 
    /**
     * The amounts pertaining to the QR code to be created.
+    * 
+    * @param amounts
+    *           The amounts pertaining to this qr creation request.
+    * @return this object.
     **/
    public CreateQrCodeMessage amounts(Amounts amounts) {
       this.amounts = amounts;

@@ -35,6 +35,10 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    /**
     * Data relating to the entity who processed the {@link PaymentRequest}. This identifies the entity who provided the
     * {@link ScanNotification} for the QR code associated with this payment.
+    *
+    * @param partner
+    *           The partner's institution id and name.
+    * @return this object.
     **/
    public PaymentResponse partner(Institution partner) {
       this.partner = partner;
@@ -57,6 +61,10 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
    /**
     * An array of tenders used to pay for the transaction. This may be used to describe the payment which was effected
     * as a result of the QR code scan e.g. the card detail ultimately used for the payment.
+    *
+    * @param tenders
+    *           A list of all tenders used to pay for the transaction.
+    * @return this object.
     **/
    public PaymentResponse tenders(List<Tender> tenders) {
       this.tenders = tenders;
@@ -75,6 +83,10 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
 
    /**
     * The amounts pertaining to the transaction.
+    *
+    * @param amounts
+    *           The amounts pertaining to the transaction.
+    * @return this object.
     **/
    public PaymentResponse amounts(Amounts amounts) {
       this.amounts = amounts;
@@ -97,6 +109,10 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
 
    /**
     * This value is echoed from the {@link PaymentRequest}.
+    *
+    * @param tranId
+    *           The transaction ID.
+    * @return this object.
     **/
    public PaymentResponse tranId(String tranId) {
       this.tranId = tranId;
@@ -116,6 +132,10 @@ public class PaymentResponse extends Transaction implements PartnerField, TranId
 
    /**
     * This value is echoed from the {@link PaymentRequest}.
+    *
+    * @param partnerPaymentToken
+    *           Partner Payment Token.
+    * @return this object.
     **/
    public PaymentResponse partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;
