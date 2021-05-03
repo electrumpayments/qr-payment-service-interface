@@ -11,3 +11,4 @@ logs/
 .idea/
 /target
 .DS_Store
+.java-version

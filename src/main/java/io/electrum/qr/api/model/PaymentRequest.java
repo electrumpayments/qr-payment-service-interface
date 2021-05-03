@@ -41,6 +41,10 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
     * Data relating to the entity who will process the payment. This identifies the entity who provided the
     * {@link ScanNotification} for the QR code associated with this {@link PaymentRequest}. This should be populated if
     * known to aid in routing the {@link PaymentRequest} to the entity which provided the {@link ScanNotification}.
+    *
+    * @param partner
+    *           The payment partner's institution ID.
+    * @return this object.
     **/
    public PaymentRequest partner(Institution partner) {
       this.partner = partner;
@@ -64,6 +68,10 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
     * The amounts pertaining to the transaction. Note that the requestAmount herein maybe be different to that submitted
     * when the QR code was requested. This request amount describes the actual amount to be processed in the
     * transaction.
+    *
+    * @param amounts
+    *           The amounts pertaining to the transaction.
+    * @return this object.
     **/
    public PaymentRequest amounts(Amounts amounts) {
       this.amounts = amounts;
@@ -91,6 +99,10 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
     * returned in the tranId field of the {@link CreateQrCodeResponse} that preceded this {@link PaymentRequest}.
     * Partners may associate this {@link PaymentRequest} with the QR code whose {@link ScanNotification} they submitted
     * with this value.
+    *
+    * @param tranId
+    *           The transaction ID.
+    * @return this object.
     **/
    public PaymentRequest tranId(String tranId) {
       this.tranId = tranId;
@@ -116,6 +128,10 @@ public class PaymentRequest extends Transaction implements PartnerField, TranIdF
     * the {@link ScanNotification} so that it is included in the {@link PaymentRequest} to the Partner. This field
     * should be populated if known. A Partner may expect to receive this value in the {@link PaymentRequest} if it was
     * provided in the {@link ScanNotification}.
+    *
+    * @param partnerPaymentToken
+    *           The partner's payment token.
+    * @return this object.
     **/
    public PaymentRequest partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;

@@ -7,17 +7,19 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import io.electrum.vas.interfaces.HasAmounts;
-import io.electrum.vas.model.VasMessage;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
+import io.electrum.vas.interfaces.HasAmounts;
+import io.electrum.vas.model.VasMessage;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -36,10 +38,16 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
    protected String rrn = null;
    protected String stan = null;
    protected Amounts amounts = null;
+   protected Customer customer = null;
+   protected QrProperties qrProperties = null;
 
    /**
     * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
+    *
+    * @param id
+    *           A UUID string representing the ID of this transaction.
+    * @return this object.
     **/
    public CreateQrCodeMessage id(String id) {
       this.id = id;
@@ -64,6 +72,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
     * The date and time of the message in UTC, as recorded by the sender. The format shall be as defined for date-time
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
+    * 
+    * @param time
+    *           The date and time that this request was generated.
+    * @return this object.
     **/
    public CreateQrCodeMessage time(DateTime time) {
       this.time = time;
@@ -88,6 +100,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * Data relating to the originator of the request.
+    *
+    * @param originator
+    *           The originator object describing where this payload originated from.
+    * @return this object.
     **/
    public CreateQrCodeMessage originator(Originator originator) {
       this.originator = originator;
@@ -108,6 +124,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * Data relating to the sender of the CreateQrCodeRequest.
+    * 
+    * @param client
+    *           The institution information pertaining to the client that sent this request to Electrum.
+    * @return this object.
     **/
    public CreateQrCodeMessage client(Institution client) {
       this.client = client;
@@ -128,6 +148,8 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * An array of identifiers which identify the transaction within each entity's system.
+    * @param transactionIdentifiers A list of transaction identifiers.
+    * @return this object.
     **/
    public CreateQrCodeMessage thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
@@ -149,6 +171,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * This is a reference set by the original source of the request.
+    * 
+    * @param rrn
+    *           The retrieval reference number correlating to this transaction.
+    * @return this object.
     **/
    public CreateQrCodeMessage rrn(String rrn) {
       this.rrn = rrn;
@@ -169,6 +195,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * The System Trace Audit Number can be used to locate transactions across different systems.
+    * 
+    * @param stan
+    *           The system trace audit number.
+    * @return this object.
     **/
    public CreateQrCodeMessage stan(String stan) {
       this.stan = stan;
@@ -190,6 +220,10 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * The amounts pertaining to the QR code to be created.
+    * 
+    * @param amounts
+    *           The amounts pertaining to this qr creation request.
+    * @return this object.
     **/
    public CreateQrCodeMessage amounts(Amounts amounts) {
       this.amounts = amounts;
@@ -209,6 +243,55 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       this.amounts = amounts;
    }
 
+   /**
+    * Information detail pertaining to the customer.
+    *
+    * @since v1.5.0
+    *
+    * @param customer instance
+    * @return CreateQrCodeMessage
+    */
+   public CreateQrCodeMessage customer(Customer customer) {
+      this.customer = customer;
+      return this;
+   }
+
+   @ApiModelProperty(required = false, value = "Information detail pertaining to the customer.")
+   @JsonProperty("customer")
+   @Valid
+   public Customer getCustomer() {
+      return customer;
+   }
+
+   public void setCustomer(Customer customer) {
+      this.customer = customer;
+   }
+
+   /**
+    *
+    * A collection of attributes that describe how a QR code is intended to be used for transacting.
+    *
+    * @since 1.5.0
+    *
+    * @param qrProperties instance
+    * @return this instance of CreateQrCodeMessage
+    */
+   public CreateQrCodeMessage qrProperties(QrProperties qrProperties) {
+      this.qrProperties = qrProperties;
+      return this;
+   }
+
+   @ApiModelProperty(required = true, value = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
+   @JsonProperty("qrProperties")
+   @Valid
+   public QrProperties getQrProperties() {
+      return qrProperties;
+   }
+
+   public void setQrProperties(QrProperties qrProperties) {
+      this.qrProperties = qrProperties;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -219,12 +302,13 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       return Objects.equals(id, request.id) && Objects.equals(time, request.time)
             && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
-            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts);
+            && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts)
+            && Objects.equals(customer, request.customer) && Objects.equals(qrProperties, request.qrProperties);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts);
+      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts, customer, qrProperties);
    }
 
    @Override
@@ -240,6 +324,8 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       sb.append("    rrn: ").append(Utils.toIndentedString(rrn)).append(System.lineSeparator());
       sb.append("    stan: ").append(Utils.toIndentedString(stan)).append(System.lineSeparator());
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
+      sb.append("    customer: ").append(Utils.toIndentedString(customer)).append(System.lineSeparator());
+      sb.append("    qrProperties: ").append(Utils.toIndentedString(qrProperties)).append(System.lineSeparator());
       sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }

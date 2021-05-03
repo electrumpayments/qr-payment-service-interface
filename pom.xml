@@ -32,9 +32,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <service-interface-base-version>3.26.0</service-interface-base-version>
-    <joda-time-version>2.9.4</joda-time-version>
-    <swagger-version>1.5.16</swagger-version>
+    <service-interface-base-version>3.30.1</service-interface-base-version>
     <javax-servlet-api-version>3.1.0</javax-servlet-api-version>
     <jersey-version>2.22.1</jersey-version>
     <el-version>2.2.4</el-version>
@@ -58,56 +56,10 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>joda-time</groupId>
-      <artifactId>joda-time</artifactId>
-      <version>${joda-time-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.swagger</groupId>
-      <artifactId>swagger-jersey2-jaxrs</artifactId>
-      <version>${swagger-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.swagger</groupId>
-      <artifactId>swagger-hibernate-validations</artifactId>
-      <version>${swagger-version}</version>
-    </dependency>
-    <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>${javax-servlet-api-version}</version>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.core</groupId>
-      <artifactId>jersey-server</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.core</groupId>
-      <artifactId>jersey-common</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.containers</groupId>
-      <artifactId>jersey-container-servlet</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.core</groupId>
-      <artifactId>jersey-client</artifactId>
-      <version>${jersey-version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.glassfish.jersey.media</groupId>
-      <artifactId>jersey-media-json-jackson</artifactId>
-      <version>${jersey-version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-annotations</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
     <dependency>
       <groupId>javax.el</groupId>
@@ -152,10 +104,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.2.0</version>
         <configuration>
           <source>8</source>
           <failOnError>false</failOnError>
+          <detectJavaApiLink>false</detectJavaApiLink> <!-- Issue was similar to this: https://stackoverflow.com/questions/58836862/jdk-11-and-javadoc -->
         </configuration>
         <executions>
           <execution>
@@ -208,23 +161,6 @@
             </apiSource>
           </apiSources>
         </configuration>
-        <dependencies>
-          <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.2.11</version>
-          </dependency>
-          <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.2.11</version>
-          </dependency>
-          <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
-            <version>2.2.11</version>
-          </dependency>
-        </dependencies>
         <executions>
           <execution>
             <phase>compile</phase>
@@ -387,6 +323,17 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>rpm-maven-plugin</artifactId>
+        <version>2.2.0</version>
+        <configuration>
+          <requires>
+            <require>electrum-service-interface-base &gt;= ${service-interface-base-version}</require>
+          </requires>
+          <group/>
+        </configuration>
       </plugin>
     </plugins>
   </build>

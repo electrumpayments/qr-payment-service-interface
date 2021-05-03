@@ -30,6 +30,10 @@ public class PaymentConfirmation extends BasicAdvice implements PartnerField, Tr
 
    /**
     * An echo of the value in the original {@link PaymentRequest}.
+    *
+    * @param partner
+    *           The partner's institution id and name.
+    * @return this object.
     **/
    public PaymentConfirmation partner(Institution partner) {
       this.partner = partner;
@@ -49,6 +53,10 @@ public class PaymentConfirmation extends BasicAdvice implements PartnerField, Tr
 
    /**
     * An echo of the value in the original {@link PaymentRequest}.
+    *
+    * @param tranId
+    *           The transaction identifier.
+    * @return this object.
     **/
    public PaymentConfirmation tranId(String tranId) {
       this.tranId = tranId;
