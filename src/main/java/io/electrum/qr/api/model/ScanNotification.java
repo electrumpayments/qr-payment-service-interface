@@ -7,7 +7,6 @@ import java.util.Objects;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import io.electrum.vas.interfaces.HasAmounts;
 import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -15,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.electrum.qr.api.model.helper.PartnerField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
+import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.ThirdPartyIdentifier;
@@ -45,6 +45,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * The randomly generated UUID identifying this notification. This may be a variant 3 or 4 as defined in [RFC
     * 4122](https://tools.ietf.org/html/rfc4122)
+    *
+    * @param id
+    *           The ID of this request.
+    * @return this object.
     **/
    public ScanNotification id(String id) {
       this.id = id;
@@ -67,6 +71,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
     * The date and time of the message in UTC, as recorded by the sender. The format shall be as defined for date-time
     * in [RFC 3339 section 5.6](https://tools.ietf.org/html/rfc3339#section-5.6). It is recommended that the optional
     * time-secfrac be included up to millisecond precision
+    *
+    * @param time
+    *           The time that this request was created.
+    * @return this object.
     **/
    public ScanNotification time(DateTime time) {
       this.time = time;
@@ -90,6 +98,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * Data relating to the entity whose customer scanned a QR code. {@link PaymentRequest} messages which have a
     * matching tranId value should be be sent to the Partner for processing.
+    *
+    * @param partner
+    *           The partner's institution id and name.
+    * @return this object.
     **/
    public ScanNotification partner(Institution partner) {
       this.partner = partner;
@@ -113,6 +125,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * Data relating to the entity with whom the Merchant will settle the transaction. A Partner may provide this
     * information if known at the time the QR code was scanned.
+    *
+    * @param settlementEntity
+    *           The settlement entity's institution ID and name.
+    * @return this object.
     **/
    public ScanNotification settlementEntity(Institution settlementEntity) {
       this.settlementEntity = settlementEntity;
@@ -134,6 +150,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * Data relating to the entity which ultimately processes the request. A Partner may provide this information if
     * known at the time the QR code was scanned.
+    *
+    * @param receiver
+    *           The receiver's institution id and name.
+    * @return this object.
     **/
    public ScanNotification receiver(Institution receiver) {
       this.receiver = receiver;
@@ -154,6 +174,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
 
    /**
     * An array of identifiers which identify the transaction within each entity's system.
+    *
+    * @param transactionIdentifiers
+    *           A list of transaction identifiers.
+    * @return this object.
     **/
    public ScanNotification thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
       this.thirdPartyIdentifiers = transactionIdentifiers;
@@ -173,6 +197,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
 
    /**
     * The amounts pertaining to the QR code which was scanned.
+    *
+    * @param amounts
+    *           The amounts pertaining to the scanned QR code.
+    * @return this object.
     **/
    public ScanNotification amounts(Amounts amounts) {
       this.amounts = amounts;
@@ -195,6 +223,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * The transaction identifier encoded within the QR Code which was scanned. Any {@link PaymentRequest} with a
     * matching tranId value should be forwarded to the Partner for processing.
+    *
+    * @param tranId
+    *           The transaction identifier
+    * @return this object.
     **/
    public ScanNotification tranId(String tranId) {
       this.tranId = tranId;
@@ -216,6 +248,10 @@ public class ScanNotification implements PartnerField, TranIdField, HasAmounts {
    /**
     * A payment token received from the Partner in the {@link ScanNotification}. If supplied by the Partner then it will
     * be echoed in the PaymentRequest to the Partner.
+    *
+    * @param partnerPaymentToken
+    *           The partner's payment token.
+    * @return this object.
     **/
    public ScanNotification partnerPaymentToken(String partnerPaymentToken) {
       this.partnerPaymentToken = partnerPaymentToken;

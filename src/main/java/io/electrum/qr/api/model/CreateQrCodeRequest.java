@@ -2,6 +2,7 @@ package io.electrum.qr.api.model;
 
 import java.util.List;
 
+import io.electrum.vas.model.Customer;
 import org.joda.time.DateTime;
 
 import io.electrum.vas.model.Amounts;
@@ -64,6 +65,18 @@ public class CreateQrCodeRequest extends CreateQrCodeMessage {
    @Override
    public CreateQrCodeRequest amounts(Amounts amounts) {
       super.amounts(amounts);
+      return this;
+   }
+
+   @Override
+   public CreateQrCodeRequest customer(Customer customer) {
+      super.customer(customer);
+      return this;
+   }
+
+   @Override
+   public CreateQrCodeRequest qrProperties(QrProperties qrProperties) {
+      super.qrProperties(qrProperties);
       return this;
    }
 

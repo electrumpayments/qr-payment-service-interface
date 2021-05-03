@@ -13,6 +13,7 @@ import io.electrum.qr.api.model.helper.QrCodeField;
 import io.electrum.qr.api.model.helper.TranIdField;
 import io.electrum.vas.Utils;
 import io.electrum.vas.model.Amounts;
+import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
 import io.electrum.vas.model.ThirdPartyIdentifier;
@@ -79,6 +80,18 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
       return this;
    }
 
+   @Override
+   public CreateQrCodeResponse customer(Customer customer) {
+      super.customer(customer);
+      return this;
+   }
+
+   @Override
+   public CreateQrCodeResponse qrProperties(QrProperties qrProperties) {
+      super.qrProperties(qrProperties);
+      return this;
+   }
+
    /**
     * The unique transaction identifier assigned by the QR code provider to this QR code. This value is also encoded in
     * the QR code returned in the qrCode field. The QR code provider is responsible for ensuring appropriate uniqueness
@@ -92,6 +105,10 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
     * more complicated codes will be more susceptible to errors when inputted manually.</li>
     * </ul>
     * This value must be provided in subsequent 'notifyScan' and 'pay' operations to link payments to specific Partners.
+    *
+    * @param tranId
+    *           The transaction identifier.
+    * @return this object.
     **/
    public CreateQrCodeResponse tranId(String tranId) {
       this.tranId = tranId;
@@ -123,6 +140,10 @@ public class CreateQrCodeResponse extends CreateQrCodeMessage implements TranIdF
     * described in the EMVCo specification but is not a fully EMVCo compliant string e.g. Tags which are mandatory under
     * the EMVCo specification may be omitted. The precise set of Tags to be populated in the QR code should be discussed
     * and agreed upon by implementation partners.
+    *
+    * @param qrCode
+    *           The full set of data to be encoded in the graphical QR code.
+    * @return this object.
     **/
    public CreateQrCodeResponse qrCode(String qrCode) {
       this.qrCode = qrCode;

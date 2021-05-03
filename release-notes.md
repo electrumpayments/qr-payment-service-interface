@@ -14,6 +14,27 @@
     - Try and avoid special characters as far as possible
 -->
 
+## Version 1.7.0 - 29 April 2021
+
+### New Features
+
+* Added a new model object called `QrProperties`.
+* Added the following member variables to the `CreateQrCodeRequest` and `CreateQrCodeResponse` model objects:
+    * `customer`
+    * `qrProperties`
+* The `service-interface-base` provides a lot of dependencies that it previously didn't. For this reason the following
+  dependencies were removed from this project's pom file:
+    * `joda-time`
+    * `swagger-jersey2-jaxrs`
+    * `swagger-hibernate-validations`
+    * `jersey-server`
+    * `jersey-common`
+    * `jersey-container-servlet`
+    * `jersey-client`
+    * `jersey-media-json-jackson`
+    * `hibernate-validator`
+* Added minimum requirement for `service-interface-base` v3.30.1 and up.
+
 ## Version 1.6.0 - 19 April 2021
 ### Features
 * Updated `ErrorDetail` model to implement `TranidField` interface.
