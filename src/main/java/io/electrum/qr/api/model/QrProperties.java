@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.model.LedgerAmount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -77,6 +78,7 @@ public class QrProperties {
     **/
    @JsonProperty("destinationAccountId")
    @ApiModelProperty(value = "The ID of the destination account to which funds will be transferred when the QR code is scanned.")
+   @Masked
    public String getDestinationAccountId() {
       return destinationAccountId;
    }
