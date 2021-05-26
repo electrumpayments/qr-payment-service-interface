@@ -5,6 +5,7 @@ Released 26 May 2021
 
 * Removed the `scheme` field from the `QrProperties` class. 
 * Replaced the `uuid` field with the `guid` field  in the `QrProperties` class.
+* Updated `service-interface-base` from `3.30.1` to `3.31.0`.
 
 ## v1.7.0 (Deprecated - see v1.7.1)
 Released 3 May 2021
