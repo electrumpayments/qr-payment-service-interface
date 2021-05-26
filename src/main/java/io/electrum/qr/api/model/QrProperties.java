@@ -20,8 +20,8 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
 public class QrProperties {
-   @JsonProperty("uuid")
-   private String uuid = null;
+   @JsonProperty("guid")
+   private String guid = null;
 
    @JsonProperty("value")
    private LedgerAmount value = null;
@@ -37,11 +37,9 @@ public class QrProperties {
 
    @JsonProperty("singleUse")
    private Boolean singleUse = null;
-   @JsonProperty("scheme")
-   private SchemeEnum scheme = null;
 
-   public QrProperties uuid(String uuid) {
-      this.uuid = uuid;
+   public QrProperties guid(String guid) {
+      this.guid = guid;
       return this;
    }
 
@@ -50,14 +48,14 @@ public class QrProperties {
     *
     * @return uuid
     **/
-   @JsonProperty("uuid")
+   @JsonProperty("guid")
    @ApiModelProperty(value = "The value which, when embedded in an EMVCo QR code, identifies that Capitec is the provider of the QR code.")
-   public String getUuid() {
-      return uuid;
+   public String getGuid() {
+      return guid;
    }
 
-   public void setUuid(String uuid) {
-      this.uuid = uuid;
+   public void setGuid(String uuid) {
+      this.guid = uuid;
    }
 
    public QrProperties value(LedgerAmount value) {
@@ -168,31 +166,6 @@ public class QrProperties {
       this.singleUse = singleUse;
    }
 
-   public QrProperties scheme(SchemeEnum scheme) {
-      this.scheme = scheme;
-      return this;
-   }
-
-   /**
-    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60;
-    * object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:
-    * * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format. * PSEUDO_EMVCO_MERCHANT - A format based on the
-    * EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be
-    * absent in this scheme. * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR
-    * code specification however it comprises the minimal set of fields to faciliate transactions.
-    *
-    * @return scheme
-    **/
-   @JsonProperty("scheme")
-   @ApiModelProperty(value = "The scheme which defines the format of the contents of the `qrData` field of a `qrCode` object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:   * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format.   * PSEUDO_EMVCO_MERCHANT - A format based on the EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be absent in this scheme.   * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR code specification however it comprises the minimal set of fields to faciliate transactions. ")
-   public SchemeEnum getScheme() {
-      return scheme;
-   }
-
-   public void setScheme(SchemeEnum scheme) {
-      this.scheme = scheme;
-   }
-
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -202,17 +175,16 @@ public class QrProperties {
          return false;
       }
       QrProperties qrProperties = (QrProperties) o;
-      return Objects.equals(this.uuid, qrProperties.uuid) && Objects.equals(this.value, qrProperties.value)
+      return Objects.equals(this.guid, qrProperties.guid) && Objects.equals(this.value, qrProperties.value)
             && Objects.equals(this.overPaymentAllowed, qrProperties.overPaymentAllowed)
             && Objects.equals(this.partPaymentAllowed, qrProperties.partPaymentAllowed)
             && Objects.equals(this.expiryDate, qrProperties.expiryDate)
-            && Objects.equals(this.singleUse, qrProperties.singleUse)
-            && Objects.equals(this.scheme, qrProperties.scheme);
+            && Objects.equals(this.singleUse, qrProperties.singleUse);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(uuid, value, overPaymentAllowed, partPaymentAllowed, expiryDate, singleUse, scheme);
+      return Objects.hash(guid, value, overPaymentAllowed, partPaymentAllowed, expiryDate, singleUse);
    }
 
    @Override
@@ -220,13 +192,12 @@ public class QrProperties {
       StringBuilder sb = new StringBuilder();
       sb.append("class QrProperties {\n");
 
-      sb.append("    uuid: ").append(toIndentedString(uuid)).append("\n");
+      sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
       sb.append("    value: ").append(toIndentedString(value)).append("\n");
       sb.append("    overPaymentAllowed: ").append(toIndentedString(overPaymentAllowed)).append("\n");
       sb.append("    partPaymentAllowed: ").append(toIndentedString(partPaymentAllowed)).append("\n");
       sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
       sb.append("    singleUse: ").append(toIndentedString(singleUse)).append("\n");
-      sb.append("    scheme: ").append(toIndentedString(scheme)).append("\n");
       sb.append("}");
       return sb.toString();
    }
@@ -239,43 +210,5 @@ public class QrProperties {
          return "null";
       }
       return o.toString().replace("\n", "\n    ");
-   }
-
-   /**
-    * The scheme which defines the format of the contents of the &#x60;qrData&#x60; field of a &#x60;qrCode&#x60;
-    * object. Allowed values are described below with a brief description. Please consult Electrum for further detail.:
-    * * EMVCO_MERCHANT - The EMVCo merchant-presented QR code format. * PSEUDO_EMVCO_MERCHANT - A format based on the
-    * EMVCo merchant-presented QR code format however fields which are manadatory in the EMVCo specification may be
-    * absent in this scheme. * ELECTRUM_MERCHANT_MINIMAL - A format which is based on the EMVCo merchant-presented QR
-    * code specification however it comprises the minimal set of fields to faciliate transactions.
-    */
-   public enum SchemeEnum {
-      EMVCO_MERCHANT("EMVCO_MERCHANT"),
-
-      PSEUDO_EMVCO_MERCHANT("PSEUDO_EMVCO_MERCHANT"),
-
-      ELECTRUM_MERCHANT_MINIMAL("ELECTRUM_MERCHANT_MINIMAL");
-
-      private String value;
-
-      SchemeEnum(String value) {
-         this.value = value;
-      }
-
-      @JsonCreator
-      public static SchemeEnum fromValue(String text) {
-         for (SchemeEnum b : SchemeEnum.values()) {
-            if (String.valueOf(b.value).equals(text)) {
-               return b;
-            }
-         }
-         return null;
-      }
-
-      @Override
-      @JsonValue
-      public String toString() {
-         return String.valueOf(value);
-      }
    }
 }
