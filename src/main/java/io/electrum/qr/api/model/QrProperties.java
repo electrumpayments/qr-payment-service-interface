@@ -4,10 +4,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import io.electrum.vas.model.LedgerAmount;
 import io.swagger.annotations.ApiModel;
@@ -20,6 +19,13 @@ import io.swagger.annotations.ApiModelProperty;
  */
 @ApiModel(description = "A collection of attributes that describe how a QR code is intended to be used for transacting.")
 public class QrProperties {
+
+   @JsonProperty("description")
+   private String description = null;
+
+   @JsonProperty("destinationAccountId")
+   private String destinationAccountId = null;
+
    @JsonProperty("guid")
    private String guid = null;
 
@@ -37,6 +43,47 @@ public class QrProperties {
 
    @JsonProperty("singleUse")
    private Boolean singleUse = null;
+
+   public QrProperties description(String description) {
+      this.description = description;
+      return this;
+   }
+
+   /**
+    * A short description for the QR code defining why it was created.
+    * 
+    * @return description
+    **/
+   @JsonProperty("description")
+   @ApiModelProperty(value = "A short description for the QR code defining why it was created.")
+   @Size(min = 0, max = 20)
+   public String getDescription() {
+      return description;
+   }
+
+   public void setDescription(String description) {
+      this.description = description;
+   }
+
+   public QrProperties destinationAccountId(String destinationAccountId) {
+      this.destinationAccountId = destinationAccountId;
+      return this;
+   }
+
+   /**
+    * The ID of the destination account to which funds will be transferred when the QR code is scanned.
+    * 
+    * @return destinationAccountId
+    **/
+   @JsonProperty("destinationAccountId")
+   @ApiModelProperty(value = "The ID of the destination account to which funds will be transferred when the QR code is scanned.")
+   public String getDestinationAccountId() {
+      return destinationAccountId;
+   }
+
+   public void setDestinationAccountId(String destinationAccountId) {
+      this.destinationAccountId = destinationAccountId;
+   }
 
    public QrProperties guid(String guid) {
       this.guid = guid;
@@ -175,7 +222,9 @@ public class QrProperties {
          return false;
       }
       QrProperties qrProperties = (QrProperties) o;
-      return Objects.equals(this.guid, qrProperties.guid) && Objects.equals(this.value, qrProperties.value)
+      return Objects.equals(this.description, qrProperties.description)
+            && Objects.equals(this.destinationAccountId, qrProperties.destinationAccountId)
+            && Objects.equals(this.guid, qrProperties.guid) && Objects.equals(this.value, qrProperties.value)
             && Objects.equals(this.overPaymentAllowed, qrProperties.overPaymentAllowed)
             && Objects.equals(this.partPaymentAllowed, qrProperties.partPaymentAllowed)
             && Objects.equals(this.expiryDate, qrProperties.expiryDate)
@@ -184,7 +233,15 @@ public class QrProperties {
 
    @Override
    public int hashCode() {
-      return Objects.hash(guid, value, overPaymentAllowed, partPaymentAllowed, expiryDate, singleUse);
+      return Objects.hash(
+            description,
+            destinationAccountId,
+            guid,
+            value,
+            overPaymentAllowed,
+            partPaymentAllowed,
+            expiryDate,
+            singleUse);
    }
 
    @Override
@@ -192,6 +249,8 @@ public class QrProperties {
       StringBuilder sb = new StringBuilder();
       sb.append("class QrProperties {\n");
 
+      sb.append("    description: ").append(toIndentedString(description)).append("\n");
+      sb.append("    destinationAccountId: ").append(toIndentedString(destinationAccountId)).append("\n");
       sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
       sb.append("    value: ").append(toIndentedString(value)).append("\n");
       sb.append("    overPaymentAllowed: ").append(toIndentedString(overPaymentAllowed)).append("\n");
