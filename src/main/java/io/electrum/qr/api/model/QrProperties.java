@@ -98,7 +98,7 @@ public class QrProperties {
     * @return uuid
     **/
    @JsonProperty("guid")
-   @ApiModelProperty(value = "The value which, when embedded in an EMVCo QR code, identifies that Capitec is the provider of the QR code.")
+   @ApiModelProperty(value = "The value which, when embedded in an EMVCo QR code, identifies the provider of the QR code.")
    public String getGuid() {
       return guid;
    }
