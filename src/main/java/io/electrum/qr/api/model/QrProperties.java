@@ -33,17 +33,11 @@ public class QrProperties {
    @JsonProperty("value")
    private LedgerAmount value = null;
 
-   @JsonProperty("overPaymentAllowed")
-   private Boolean overPaymentAllowed = null;
-
    @JsonProperty("partPaymentAllowed")
    private Boolean partPaymentAllowed = null;
 
    @JsonProperty("expiryDate")
    private OffsetDateTime expiryDate = null;
-
-   @JsonProperty("singleUse")
-   private Boolean singleUse = null;
 
    public QrProperties description(String description) {
       this.description = description;
@@ -128,27 +122,6 @@ public class QrProperties {
       this.value = value;
    }
 
-   public QrProperties overPaymentAllowed(Boolean overPaymentAllowed) {
-      this.overPaymentAllowed = overPaymentAllowed;
-      return this;
-   }
-
-   /**
-    * Indicates whether or not the transaction against the QR may use an amount greater than the value in the
-    * &#x60;amount&#x60; field.
-    *
-    * @return overPaymentAllowed
-    **/
-   @JsonProperty("overPaymentAllowed")
-   @ApiModelProperty(value = "Indicates whether or not the transaction against the QR may use an amount greater than the value in the `amount` field.")
-   public Boolean isOverPaymentAllowed() {
-      return overPaymentAllowed;
-   }
-
-   public void setOverPaymentAllowed(Boolean overPaymentAllowed) {
-      this.overPaymentAllowed = overPaymentAllowed;
-   }
-
    public QrProperties partPaymentAllowed(Boolean partPaymentAllowed) {
       this.partPaymentAllowed = partPaymentAllowed;
       return this;
@@ -194,27 +167,6 @@ public class QrProperties {
       this.expiryDate = expiryDate;
    }
 
-   public QrProperties singleUse(Boolean singleUse) {
-      this.singleUse = singleUse;
-      return this;
-   }
-
-   /**
-    * If set to &#x60;true&#x60;, the QR code is intended to be used for a single transaction only. *Note*: This is not
-    * a strictly enforced rule but is rather intended as a guide as to the intended use of the QR code.
-    *
-    * @return singleUse
-    **/
-   @JsonProperty("singleUse")
-   @ApiModelProperty(value = "If set to `true`, the QR code is intended to be used for a single transaction only. *Note*: This is not a strictly enforced rule but is rather intended as a guide as to the intended use of the QR code.")
-   public Boolean isSingleUse() {
-      return singleUse;
-   }
-
-   public void setSingleUse(Boolean singleUse) {
-      this.singleUse = singleUse;
-   }
-
    @Override
    public boolean equals(java.lang.Object o) {
       if (this == o) {
@@ -227,10 +179,8 @@ public class QrProperties {
       return Objects.equals(this.description, qrProperties.description)
             && Objects.equals(this.destinationAccountId, qrProperties.destinationAccountId)
             && Objects.equals(this.guid, qrProperties.guid) && Objects.equals(this.value, qrProperties.value)
-            && Objects.equals(this.overPaymentAllowed, qrProperties.overPaymentAllowed)
             && Objects.equals(this.partPaymentAllowed, qrProperties.partPaymentAllowed)
-            && Objects.equals(this.expiryDate, qrProperties.expiryDate)
-            && Objects.equals(this.singleUse, qrProperties.singleUse);
+            && Objects.equals(this.expiryDate, qrProperties.expiryDate);
    }
 
    @Override
@@ -240,10 +190,8 @@ public class QrProperties {
             destinationAccountId,
             guid,
             value,
-            overPaymentAllowed,
             partPaymentAllowed,
-            expiryDate,
-            singleUse);
+            expiryDate);
    }
 
    @Override
@@ -255,10 +203,8 @@ public class QrProperties {
       sb.append("    destinationAccountId: ").append(toIndentedString(destinationAccountId)).append("\n");
       sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
       sb.append("    value: ").append(toIndentedString(value)).append("\n");
-      sb.append("    overPaymentAllowed: ").append(toIndentedString(overPaymentAllowed)).append("\n");
       sb.append("    partPaymentAllowed: ").append(toIndentedString(partPaymentAllowed)).append("\n");
       sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
-      sb.append("    singleUse: ").append(toIndentedString(singleUse)).append("\n");
       sb.append("}");
       return sb.toString();
    }
