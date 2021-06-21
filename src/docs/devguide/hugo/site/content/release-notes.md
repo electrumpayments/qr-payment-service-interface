@@ -1,9 +1,9 @@
 This page describes changes to the QR Payment Service Interface implemented across different releases of the interface.
 
 ## v1.8.0
-Released 26 May 2021
+Released 21 June 2021
 
-* Removed the `scheme` field from the `QrProperties` class.
+* Removed the `scheme`, `overPaymentAllowed` and `singleUse` fields from the `QrProperties` class.
 * Replaced the `uuid` field with the `guid` field  in the `QrProperties` class.
 * Added `description` and `destinationAccountId` fields to the `QrProperties` class.
 * Updated `service-interface-base` from `3.30.1` to `3.31.0`.
