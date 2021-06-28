@@ -18,6 +18,7 @@ import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
+import io.electrum.vas.model.PaymentMethod;
 import io.electrum.vas.model.ThirdPartyIdentifier;
 import io.electrum.vas.model.VasMessage;
 import io.swagger.annotations.ApiModel;
@@ -40,7 +41,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
    protected Amounts amounts = null;
    protected Customer customer = null;
    protected QrProperties qrProperties = null;
-   protected String destinationAccountId = null;
+   protected List<PaymentMethod> paymentMethods = new ArrayList<>();
 
    /**
     * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
@@ -298,28 +299,33 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
    }
 
    /**
-    * The ID of the destination account to which funds will be transferred when the QR code is scanned.
+    * A list of payment methods that the QR owner will accept payment with. The paymentMethods specify the destination
+    * to which funds may be transferred when the QR code is scanned.
     *
     * @since 1.8.0
     *
-    * @param destinationAccountId
-    *           The qr owner's account ID
+    * @param paymentMethods
+    *           The qr owner's accepted payment methods.
     * @return this instance of CreateQrCodeMessage
     **/
-   public CreateQrCodeMessage destinationAccountId(String destinationAccountId) {
-      this.destinationAccountId = destinationAccountId;
+   public CreateQrCodeMessage paymentMethods(@NotNull List<PaymentMethod> paymentMethods) {
+      Objects.requireNonNull(paymentMethods);
+      this.paymentMethods = paymentMethods;
       return this;
    }
 
-   @JsonProperty("destinationAccountId")
-   @ApiModelProperty(value = "The ID of the destination account to which funds will be transferred when the QR code is scanned.")
+   @JsonProperty("paymentMethods")
+   @ApiModelProperty(value = "")
+   @Valid
    @Masked
-   public String getDestinationAccountId() {
-      return destinationAccountId;
+   @NotNull
+   public List<PaymentMethod> getPaymentMethods() {
+      return paymentMethods;
    }
 
-   public void setDestinationAccountId(String destinationAccountId) {
-      this.destinationAccountId = destinationAccountId;
+   public void setPaymentMethods(@NotNull List<PaymentMethod> paymentMethods) {
+      Objects.requireNonNull(paymentMethods);
+      this.paymentMethods = paymentMethods;
    }
 
    @Override
@@ -334,7 +340,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
             && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts)
             && Objects.equals(customer, request.customer) && Objects.equals(qrProperties, request.qrProperties)
-            && Objects.equals(destinationAccountId, request.destinationAccountId);
+            && Objects.equals(paymentMethods, request.paymentMethods);
    }
 
    @Override
@@ -350,7 +356,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
             amounts,
             customer,
             qrProperties,
-            destinationAccountId);
+            paymentMethods);
    }
 
    @Override
@@ -368,9 +374,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
       sb.append("    customer: ").append(Utils.toIndentedString(customer)).append(System.lineSeparator());
       sb.append("    qrProperties: ").append(Utils.toIndentedString(qrProperties)).append(System.lineSeparator());
-      sb.append("    destinationAccountId: ")
-            .append(Utils.toIndentedString(destinationAccountId))
-            .append(System.lineSeparator());
+      sb.append("    paymentMethods: ").append(Utils.toIndentedString(paymentMethods)).append(System.lineSeparator());
       sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }

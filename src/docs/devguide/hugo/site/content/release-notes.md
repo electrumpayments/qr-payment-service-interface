@@ -6,7 +6,7 @@ Released 28 June 2021
 * Removed the `scheme`, `overPaymentAllowed` and `singleUse` fields from the `QrProperties` class.
 * Replaced the `uuid` field with the `guid` field  in the `QrProperties` class.
 * Added `description` field to the `QrProperties` class.
-* Added `destinationAccountId` to the `CreateQrCodeMessage` class.
+* Added `paymentMethods` field to the `CreateQrCodeMessage` class.
 * Updated `service-interface-base` from `3.30.1` to `3.31.0`.
 * Added `message-masking-sdk` dependency so that API fields can be masked.
 
