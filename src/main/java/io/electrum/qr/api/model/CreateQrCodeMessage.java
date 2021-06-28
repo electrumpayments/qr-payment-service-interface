@@ -11,14 +11,15 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.electrum.sdk.masking2.Masked;
 import io.electrum.vas.Utils;
 import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.Amounts;
 import io.electrum.vas.model.Customer;
 import io.electrum.vas.model.Institution;
 import io.electrum.vas.model.Originator;
+import io.electrum.vas.model.PaymentMethod;
 import io.electrum.vas.model.ThirdPartyIdentifier;
-import io.electrum.vas.interfaces.HasAmounts;
 import io.electrum.vas.model.VasMessage;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -40,6 +41,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
    protected Amounts amounts = null;
    protected Customer customer = null;
    protected QrProperties qrProperties = null;
+   protected List<PaymentMethod> paymentMethods = new ArrayList<>();
 
    /**
     * The randomly generated UUID identifying this request. This may be a variant 3 or 4 as defined in [RFC
@@ -148,7 +150,9 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
 
    /**
     * An array of identifiers which identify the transaction within each entity's system.
-    * @param transactionIdentifiers A list of transaction identifiers.
+    * 
+    * @param transactionIdentifiers
+    *           A list of transaction identifiers.
     * @return this object.
     **/
    public CreateQrCodeMessage thirdPartyIdentifiers(List<ThirdPartyIdentifier> transactionIdentifiers) {
@@ -248,7 +252,8 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
     *
     * @since v1.5.0
     *
-    * @param customer instance
+    * @param customer
+    *           instance
     * @return CreateQrCodeMessage
     */
    public CreateQrCodeMessage customer(Customer customer) {
@@ -273,7 +278,8 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
     *
     * @since 1.5.0
     *
-    * @param qrProperties instance
+    * @param qrProperties
+    *           instance
     * @return this instance of CreateQrCodeMessage
     */
    public CreateQrCodeMessage qrProperties(QrProperties qrProperties) {
@@ -292,6 +298,36 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       this.qrProperties = qrProperties;
    }
 
+   /**
+    * A list of payment methods that the QR owner will accept payment with. The paymentMethods specify the destination
+    * to which funds may be transferred when the QR code is scanned.
+    *
+    * @since 1.8.0
+    *
+    * @param paymentMethods
+    *           The qr owner's accepted payment methods.
+    * @return this instance of CreateQrCodeMessage
+    **/
+   public CreateQrCodeMessage paymentMethods(@NotNull List<PaymentMethod> paymentMethods) {
+      Objects.requireNonNull(paymentMethods);
+      this.paymentMethods = paymentMethods;
+      return this;
+   }
+
+   @JsonProperty("paymentMethods")
+   @ApiModelProperty(value = "")
+   @Valid
+   @Masked
+   @NotNull
+   public List<PaymentMethod> getPaymentMethods() {
+      return paymentMethods;
+   }
+
+   public void setPaymentMethods(@NotNull List<PaymentMethod> paymentMethods) {
+      Objects.requireNonNull(paymentMethods);
+      this.paymentMethods = paymentMethods;
+   }
+
    @Override
    public boolean equals(Object o) {
       if (this == o)
@@ -303,12 +339,24 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
             && Objects.equals(originator, request.originator) && Objects.equals(client, request.client)
             && Objects.equals(thirdPartyIdentifiers, request.thirdPartyIdentifiers) && Objects.equals(rrn, request.rrn)
             && Objects.equals(stan, request.stan) && Objects.equals(amounts, request.amounts)
-            && Objects.equals(customer, request.customer) && Objects.equals(qrProperties, request.qrProperties);
+            && Objects.equals(customer, request.customer) && Objects.equals(qrProperties, request.qrProperties)
+            && Objects.equals(paymentMethods, request.paymentMethods);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(id, time, originator, client, thirdPartyIdentifiers, rrn, stan, amounts, customer, qrProperties);
+      return Objects.hash(
+            id,
+            time,
+            originator,
+            client,
+            thirdPartyIdentifiers,
+            rrn,
+            stan,
+            amounts,
+            customer,
+            qrProperties,
+            paymentMethods);
    }
 
    @Override
@@ -326,6 +374,7 @@ public class CreateQrCodeMessage implements HasAmounts, VasMessage {
       sb.append("    amounts: ").append(Utils.toIndentedString(amounts)).append(System.lineSeparator());
       sb.append("    customer: ").append(Utils.toIndentedString(customer)).append(System.lineSeparator());
       sb.append("    qrProperties: ").append(Utils.toIndentedString(qrProperties)).append(System.lineSeparator());
+      sb.append("    paymentMethods: ").append(Utils.toIndentedString(paymentMethods)).append(System.lineSeparator());
       sb.append("}").append(System.lineSeparator());
       return sb.toString();
    }

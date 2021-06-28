@@ -6,18 +6,20 @@ You can find documentation for this project [here](https://electrumpayments.gith
 
 ## Java projects
 
-To include the service interface into your maven project, include the below dependency.
+To include the service interface into your maven project, include the below dependencies:
 
 ```xml
 <dependency>
     <groupId>io.electrum</groupId>
     <artifactId>qr-payment-service-interface</artifactId>
-    <version>1.7.0</version>
+    <version>1.8.0</version>
 </dependency>
+```
+```xml
 <dependency>
       <groupId>io.electrum</groupId>
       <artifactId>service-interface-base</artifactId>
-      <version>3.34.1</version>
+      <version>3.31.0</version>
 </dependency>
 ```
 
