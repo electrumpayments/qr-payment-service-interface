@@ -8,8 +8,6 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.electrum.sdk.masking2.Masked;
-import io.electrum.vas.model.LedgerAmount;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -24,14 +22,8 @@ public class QrProperties {
    @JsonProperty("description")
    private String description = null;
 
-   @JsonProperty("destinationAccountId")
-   private String destinationAccountId = null;
-
    @JsonProperty("guid")
    private String guid = null;
-
-   @JsonProperty("value")
-   private LedgerAmount value = null;
 
    @JsonProperty("partPaymentAllowed")
    private Boolean partPaymentAllowed = null;
@@ -60,27 +52,6 @@ public class QrProperties {
       this.description = description;
    }
 
-   public QrProperties destinationAccountId(String destinationAccountId) {
-      this.destinationAccountId = destinationAccountId;
-      return this;
-   }
-
-   /**
-    * The ID of the destination account to which funds will be transferred when the QR code is scanned.
-    * 
-    * @return destinationAccountId
-    **/
-   @JsonProperty("destinationAccountId")
-   @ApiModelProperty(value = "The ID of the destination account to which funds will be transferred when the QR code is scanned.")
-   @Masked
-   public String getDestinationAccountId() {
-      return destinationAccountId;
-   }
-
-   public void setDestinationAccountId(String destinationAccountId) {
-      this.destinationAccountId = destinationAccountId;
-   }
-
    public QrProperties guid(String guid) {
       this.guid = guid;
       return this;
@@ -99,27 +70,6 @@ public class QrProperties {
 
    public void setGuid(String guid) {
       this.guid = guid;
-   }
-
-   public QrProperties value(LedgerAmount value) {
-      this.value = value;
-      return this;
-   }
-
-   /**
-    * Get value
-    *
-    * @return value
-    **/
-   @JsonProperty("value")
-   @ApiModelProperty(value = "")
-   @Valid
-   public LedgerAmount getValue() {
-      return value;
-   }
-
-   public void setValue(LedgerAmount value) {
-      this.value = value;
    }
 
    public QrProperties partPaymentAllowed(Boolean partPaymentAllowed) {
@@ -176,22 +126,14 @@ public class QrProperties {
          return false;
       }
       QrProperties qrProperties = (QrProperties) o;
-      return Objects.equals(this.description, qrProperties.description)
-            && Objects.equals(this.destinationAccountId, qrProperties.destinationAccountId)
-            && Objects.equals(this.guid, qrProperties.guid) && Objects.equals(this.value, qrProperties.value)
+      return Objects.equals(this.description, qrProperties.description) && Objects.equals(this.guid, qrProperties.guid)
             && Objects.equals(this.partPaymentAllowed, qrProperties.partPaymentAllowed)
             && Objects.equals(this.expiryDate, qrProperties.expiryDate);
    }
 
    @Override
    public int hashCode() {
-      return Objects.hash(
-            description,
-            destinationAccountId,
-            guid,
-            value,
-            partPaymentAllowed,
-            expiryDate);
+      return Objects.hash(description, guid, partPaymentAllowed, expiryDate);
    }
 
    @Override
@@ -200,9 +142,7 @@ public class QrProperties {
       sb.append("class QrProperties {\n");
 
       sb.append("    description: ").append(toIndentedString(description)).append("\n");
-      sb.append("    destinationAccountId: ").append(toIndentedString(destinationAccountId)).append("\n");
       sb.append("    guid: ").append(toIndentedString(guid)).append("\n");
-      sb.append("    value: ").append(toIndentedString(value)).append("\n");
       sb.append("    partPaymentAllowed: ").append(toIndentedString(partPaymentAllowed)).append("\n");
       sb.append("    expiryDate: ").append(toIndentedString(expiryDate)).append("\n");
       sb.append("}");
